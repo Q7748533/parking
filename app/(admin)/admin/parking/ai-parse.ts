@@ -372,26 +372,22 @@ export async function summarizeReviews(
 
   const prompt = `You are a professional content writer for an airport parking comparison website.
 
-Your task is to read the following traveler reviews for "${providerName}" and write a natural, informative summary that helps future travelers decide if this parking option is right for them.
+Read the traveler reviews below for "${providerName}" and write ONE flowing paragraph (500-1200 characters) that helps future travelers understand what to expect from this parking provider.
 
-STRUCTURE (write as one flowing paragraph, 4-6 sentences, 500-1200 characters):
+COVER THESE ASPECTS (in any order, naturally):
+- What travelers consistently praise or appreciate
+- Any recurring concerns or mixed feedback (honest — only if present in reviews)
+- What kind of traveler would find this parking option suitable
 
-Sentence 1 — Overall impression: summarize the general sentiment from reviews.
-Sentence 2 — Most praised aspect: what do travelers consistently highlight (e.g. shuttle, staff, location)?
-Sentence 3 — Second most mentioned positive: another recurring theme from the reviews.
-Sentence 4 — Any common cautions or mixed feedback (only if present in the actual reviews — otherwise skip).
-Sentence 5 — Who this is best for: summarize the ideal traveler profile based on review themes.
-Sentence 6 — Closing takeaway: one line that captures why travelers choose this provider.
-
-RULES:
-- Only mention things that appear in the actual reviews. Do not fabricate.
-- Use natural, professional English for US travelers.
-- Focus on recurring themes: shuttle service, staff friendliness, security, location, price, cleanliness, ease of check-in.
-- If reviews are mixed, acknowledge both positives and common concerns honestly.
-- Write in a warm, trustworthy tone — as if a friend is summarizing what they read.
-- Do NOT use phrases like "reviews mention" or "travelers say" in the summary itself — just state the findings directly.
-- IMPORTANT: If the reviews contain very little content, still produce at least 3 substantial sentences. Do not output fewer than 400 characters.
-- If reviews only mention 1-2 themes, elaborate on those themes with specific detail from the reviews.
+WRITING RULES:
+- Use natural, conversational English. Vary sentence length and structure.
+- CRITICAL: Every parking provider is different. Write a UNIQUE summary that reflects THIS specific provider's reviews. Do NOT follow a formula.
+- AVOID formulaic phrases like "stands out as", "the standout feature is", "is ideal for", "top-tier option". Find fresh ways to express the same ideas.
+- AVOID generic closings like "travelers return time and again" or "remains a top choice".
+- Only mention things from the actual reviews. Do not fabricate.
+- Do NOT use the word "overall" to start a sentence.
+- Write as if a friend is telling another friend what to expect — warm, direct, no marketing fluff.
+- Minimum 400 characters. Stop at 1200.
 
 REVIEWS TO SUMMARIZE:
 ${reviewsText.substring(0, 8000)}`;
@@ -409,7 +405,7 @@ ${reviewsText.substring(0, 8000)}`;
       body: JSON.stringify({
         model: "gemini-3.1-pro-preview",
         messages: [{ role: "user", content: prompt }],
-        temperature: 0.5,
+        temperature: 0.7,
         max_tokens: 800,
       }),
       signal: controller.signal,
