@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Airport {
+  id        String   @id @default(uuid())
+  code      String   @unique
+  name      String
+  city      String
+  state     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  parkingProviders ParkingProvider[]
+
+  @@map("airports")
+}
+
+model ParkingProvider {
+  id                     String   @id @default(uuid())
+  name                   String
+  slug                   String
+  airportId              String   @map("airport_id")
+  type                   String // indoor, outdoor, covered, valet, shuttle, economy, premium
+  pricePerDay            Float    @map("price_per_day")
+  distance               String   // e.g. "1.5 miles"
+  features               String   // comma-separated amenity list
+  affiliateUrl           String?  @map("affiliate_url")
+
+  // Extended fields — address
+  description            String?
+  addressLine1           String?  @map("address_line1")
+  city                   String?
+  stateCode              String?  @map("state_code")
+  zipCode                String?  @map("zip_code")
+  latitude               String?
+  longitude              String?
+
+  // Shuttle
+  shuttleService         Boolean  @default(false) @map("shuttle_service")
+  shuttleFrequency       String?  @map("shuttle_frequency")
+  shuttleDescription     String?  @map("shuttle_description")
+
+  // Policies
+  cancellationPolicy     String?  @map("cancellation_policy")
+  parkingAccess          String?  @map("parking_access")
+  customMessage          String?  @map("custom_message")
+
+  // Ratings
+  rating                 Float    @default(0)
+  ratingCount            Int      @default(0)  @map("rating_count")
+  recommendationPercentage Float  @default(0) @map("recommendation_percentage")
+
+  // Contact & classification
+  contactPhone           String?  @map("contact_phone")
+  locationType           String?  @map("location_type")
+
+  // Pricing
+  strikeOffPrice         Float    @default(0)  @map("strike_off_price")
+  discountPercentage     Float    @default(0)  @map("discount_percentage")
+
+  // Structured data (JSON strings)
+  operatingHours         String?  @map("operating_hours")
+  amenities              String?  // JSON array of amenity objects
+
+  // Timestamps
+  createdAt              DateTime @default(now()) @map("created_at")
+  updatedAt              DateTime @updatedAt     @map("updated_at")
+
+  // Relations
+  airport Airport @relation(fields: [airportId], references: [id], onDelete: Cascade)
+
+  @@map("parking_providers")
+}

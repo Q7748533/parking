@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://airportmatrix.com/sitemap.xml
