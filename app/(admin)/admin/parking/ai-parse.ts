@@ -91,6 +91,7 @@ interface RawReviewAttribute {
 }
 
 interface RawParkingType {
+  parkingMainType?: string;
   parkingType?: string;
   parking_type?: string;
   totalPrice?: number;
@@ -101,6 +102,7 @@ interface RawParkingType {
   strike_off_price?: number;
   discountPercentage?: number;
   discount_percentage?: number;
+  freeCancelAvailable?: boolean;
 }
 
 interface RawAmenity {
