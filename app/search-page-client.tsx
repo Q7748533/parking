@@ -184,13 +184,13 @@ export function SearchPageClient({ airportsWithParking, totalAirports = 0, total
                         {airport.city}, {airport.state}
                       </p>
                     </div>
-                    {airport.parkingProviders.length > 0 && (
+                    {airport.totalParkingCount > 0 && (
                       <a
                         href={`/airport/${airport.code.toLowerCase()}`}
                         className="text-sm font-medium text-[#6366f1] hover:text-[#5558e0] transition-colors flex-shrink-0"
-                        aria-label={`View all ${airport.parkingProviders.length} parking options at ${airport.name}`}
+                        aria-label={`View all ${airport.totalParkingCount} parking options at ${airport.name}`}
                       >
-                        All {airport.parkingProviders.length} Parking
+                        All {airport.totalParkingCount} Parking
                       </a>
                     )}
                   </div>

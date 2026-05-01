@@ -28,6 +28,7 @@ export type ParkingProvider = {
 
 export type AirportWithParking = Airport & {
   parkingProviders: ParkingProvider[];
+  totalParkingCount: number;
 };
 
 // Shared helper: map a parking provider row to a typed object
@@ -143,12 +144,27 @@ export async function getAirportsWithParking(): Promise<{ success: boolean; data
     const airports: Airport[] = airportsResult.rows.map(rowToAirport);
     const airportIds = airports.map((a) => a.id);
 
-    // Single batch query instead of N+1
-    const parkingByAirport = await batchGetParkingProviders(airportIds);
+    // Fetch real total parking counts per airport
+    const countsMap = new Map<string, number>();
+    if (airportIds.length > 0) {
+      const countPlaceholders = airportIds.map(() => "?").join(", ");
+      const countsResult = await turso.execute({
+        sql: `SELECT airport_id, COUNT(*) as cnt FROM parking_providers
+              WHERE airport_id IN (${countPlaceholders}) GROUP BY airport_id`,
+        args: airportIds,
+      });
+      for (const row of countsResult.rows) {
+        countsMap.set(String(row.airport_id), Number(row.cnt));
+      }
+    }
+
+    // Batch fetch providers — show up to 10 per airport
+    const parkingByAirport = await batchGetParkingProviders(airportIds, 10);
 
     const airportsWithParking: AirportWithParking[] = airports.map((airport) => ({
       ...airport,
       parkingProviders: parkingByAirport.get(airport.id) || [],
+      totalParkingCount: countsMap.get(airport.id) || 0,
     }));
 
     return { success: true, data: airportsWithParking };
