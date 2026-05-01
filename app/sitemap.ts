@@ -1,6 +1,9 @@
 import { MetadataRoute } from "next";
 import { turso } from "@/lib/db";
 
+// Regenerate sitemap every 30 minutes (keeps Google in sync with new data)
+export const revalidate = 1800;
+
 const BASE_URL = process.env.SITE_URL || "https://airportmatrix.com";
 
 const STATE_CODE_TO_SLUG: Record<string, string> = {
