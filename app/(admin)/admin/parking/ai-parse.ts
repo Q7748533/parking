@@ -393,7 +393,7 @@ FABRICATION PREVENTION (most important — follow strictly):
 - Before each sentence, silently verify: "Can I point to a specific review that says this?" If the answer is no, delete that sentence.
 - If the reviews are vague or short, keep the summary short and honest rather than filling space with assumptions.
 - A one-sentence mention of "ready when you arrive" does NOT mean valet service. Do not infer services that are not explicitly described.
-- Use the provider name "${providerName}" as-is. Do not add parentheticals, alternate names, or operating-as notes unless they appear in the reviews themselves.
+- Use the provider name "${providerName}" as-is. If the reviews use a different name (e.g. an old brand name), do NOT mention it. Use only the name given here. No parentheticals like "which many call X" or "aka Y".
 
 REVIEWS TO SUMMARIZE:
 ${reviewsText.substring(0, 8000)}`;
