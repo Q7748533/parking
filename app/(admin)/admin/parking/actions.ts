@@ -279,6 +279,7 @@ export async function createParkingProvider(data: ParkingFormData) {
       ],
     });
     revalidatePath("/(admin)/admin/parking");
+    revalidatePath("/");
     return { success: true, data: { id, slug } };
   } catch (error) {
     console.error("Failed to create parking provider:", error);
@@ -371,6 +372,7 @@ export async function updateParkingProvider(id: string, data: ParkingFormData) {
       ],
     });
     revalidatePath("/(admin)/admin/parking");
+    revalidatePath("/");
     return { success: true, data: { slug } };
   } catch (error) {
     console.error("Failed to update parking provider:", error);
@@ -385,6 +387,7 @@ export async function deleteParkingProvider(id: string) {
       args: [id],
     });
     revalidatePath("/(admin)/admin/parking");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     console.error("Failed to delete parking provider:", error);
