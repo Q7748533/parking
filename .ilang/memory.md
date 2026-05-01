@@ -400,6 +400,8 @@ Parking CRUD now calls `revalidatePath("/")` alongside admin paths. Adding/editi
 
 **Anti-fabrication — provider name:** Added rule preventing AI from embellishing provider names with parentheticals, alternate names, or "operating as" notes unless those appear in the actual reviews.
 
+**Anti-template — openings & transitions:** Banned "goes a long way", "solid match", repeated "If you're..." openings. Added rule to vary sentence starters across summaries.
+
 ### Homepage display fix (2026-04-30)
 
 **perAirport increased:** 5→10 parking providers displayed per airport on homepage.

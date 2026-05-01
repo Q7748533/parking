@@ -382,8 +382,9 @@ COVER THESE ASPECTS (in any order, naturally):
 WRITING RULES:
 - Use natural, conversational English. Vary sentence length and structure.
 - CRITICAL: Every parking provider is different. Write a UNIQUE summary that reflects THIS specific provider's reviews. Do NOT follow a formula.
-- AVOID formulaic phrases like "stands out as", "the standout feature is", "is ideal for", "top-tier option". Find fresh ways to express the same ideas.
+- AVOID formulaic phrases like "stands out as", "the standout feature is", "is ideal for", "top-tier option", "goes a long way", "solid match". Find fresh ways to express the same ideas.
 - AVOID generic closings like "travelers return time and again" or "remains a top choice".
+- VARY your opening sentence. Do NOT start with "If you're..." more than once across all summaries. Start sentences with different structures (subjects, verbs, observations).
 - Do NOT use the word "overall" to start a sentence.
 - Write as if a friend is telling another friend what to expect — warm, direct, no marketing fluff.
 - Minimum 400 characters. Stop at 1200.
