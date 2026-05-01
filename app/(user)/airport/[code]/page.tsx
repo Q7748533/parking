@@ -4,6 +4,7 @@ import { turso } from "@/lib/db";
 import { AirportParkingClient } from "./airport-parking-client";
 import { AirportSeoContent } from "./airport-seo-content";
 import { AirportFaq } from "./airport-faq";
+import { NearbyAirports } from "./nearby-airports";
 
 export const revalidate = 3600;
 
