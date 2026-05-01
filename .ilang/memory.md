@@ -399,3 +399,9 @@ Parking CRUD now calls `revalidatePath("/")` alongside admin paths. Adding/editi
 **Placeholder text:** Empty "What Travelers Say" now shows natural text ("Check back soon for a summary...") instead of admin-facing message.
 
 **Anti-fabrication — provider name:** Added rule preventing AI from embellishing provider names with parentheticals, alternate names, or "operating as" notes unless those appear in the actual reviews.
+
+### Homepage display fix (2026-04-30)
+
+**perAirport increased:** 5→10 parking providers displayed per airport on homepage.
+
+**Real total counts:** Added `totalParkingCount` to `AirportWithParking` type. "All XX Parking" link now shows real DB count (not truncated display count). Count fetched via GROUP BY query alongside parking data.
