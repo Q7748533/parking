@@ -212,9 +212,10 @@ export function ParkingDetailClient({ parking, otherParking = [] }: ParkingDetai
                       <MessageSquare className="w-4 h-4 text-[#6366f1]" />
                       What Travelers Say
                     </h2>
-                    <p className="text-sm text-gray-400 italic">
-                      AI review summary coming soon. Add traveler reviews in the admin panel.
-                    </p>
+
+                  <p className="text-sm text-gray-500">
+                    Check back soon for a summary of what travelers say about {parking.name.replace(/\s*\([^)]*\)\s*$/i, '').trim()}.
+                  </p>
                   </div>
                 )}
 
