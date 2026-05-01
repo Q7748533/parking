@@ -22,8 +22,8 @@
 - **Icons:** lucide-react
 - **Tables:** @tanstack/react-table (admin), native `<table>` (public)
 - **Database:** Turso (libSQL) via `@libsql/client` (direct SQL, no ORM)
-- **AI:** Gemini via vectorengine.ai proxy — content generation, review summarization
-- **Runtime:** Node.js, deployed on Vercel
+- **AI:** Gemini via vectorengine.ai proxy — content generation, review summarization (anti-fabrication prompt, temperature 0.7)
+- **Deployment:** Vercel (free tier, `ignoreBuildErrors` for Turbopack build)
 
 ## Code Conventions
 
@@ -58,7 +58,9 @@
 - **Client components** handle search/filter state; admin CRUD uses client state with server action calls
 - **No auth** for admin routes currently
 - **AI parse pipeline:** Raw JSON → `extractBasicData()` → `resolveAirportId()` → `generateContentWithAI()` → merged form data. Separate `summarizeReviews()` for review text.
-- **Batch queries:** `batchGetParkingProviders()` fetches all parking in 1 query for search/listing
+- **Batch queries:** `batchGetParkingProviders()` fetches all parking in 1 query (up to 10 per airport), with separate GROUP BY for real total counts
+- **Cache invalidation:** Admin CRUD calls `revalidatePath("/")` so homepage refreshes instantly on parking changes
 - **Parallel stats:** Airport detail page runs 9 parallel DB queries for stats, with in-memory fallback
 - **Loading UX:** `loading.tsx` skeleton files at key route segments
 - **Error states:** Red banner + retry on `search-page-client` and `airport-parking-client`
+- **Debounce:** 200ms client-side search filter (no keystroke jank)

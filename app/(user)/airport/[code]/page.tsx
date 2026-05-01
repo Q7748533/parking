@@ -305,6 +305,7 @@ export default async function AirportPage({ params }: AirportPageProps) {
         hasCovered={seoStats.coveredCount > 0}
         uniqueTypes={[...new Set(seoStats.types.map((t) => t.trim()).filter(Boolean))]}
       />
+      <NearbyAirports airportCode={airport.code} airportState={airport.state} airportName={airport.name} />
     </>
   );
 }

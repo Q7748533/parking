@@ -405,3 +405,9 @@ Parking CRUD now calls `revalidatePath("/")` alongside admin paths. Adding/editi
 **perAirport increased:** 5→10 parking providers displayed per airport on homepage.
 
 **Real total counts:** Added `totalParkingCount` to `AirportWithParking` type. "All XX Parking" link now shows real DB count (not truncated display count). Count fetched via GROUP BY query alongside parking data.
+
+### PSEO — state aggregation + nearby airports (2026-04-30)
+
+**State pages:** Created `/airport-parking/[state]` dynamic route. Covers all 50 states via SLUG_TO_STATE map. Each page shows all airports in that state as clickable cards with parking count. Breadcrumb + meta description dynamic. Added to sitemap.
+
+**Nearby airports:** Created `NearbyAirports` server component on airport detail page. Queries other airports in same state (up to 4) + "All {state} airports →" link to state page. Boosts internal linking and dwell time.
