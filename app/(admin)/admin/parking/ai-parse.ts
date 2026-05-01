@@ -384,10 +384,16 @@ WRITING RULES:
 - CRITICAL: Every parking provider is different. Write a UNIQUE summary that reflects THIS specific provider's reviews. Do NOT follow a formula.
 - AVOID formulaic phrases like "stands out as", "the standout feature is", "is ideal for", "top-tier option". Find fresh ways to express the same ideas.
 - AVOID generic closings like "travelers return time and again" or "remains a top choice".
-- Only mention things from the actual reviews. Do not fabricate.
 - Do NOT use the word "overall" to start a sentence.
 - Write as if a friend is telling another friend what to expect — warm, direct, no marketing fluff.
 - Minimum 400 characters. Stop at 1200.
+
+FABRICATION PREVENTION (most important — follow strictly):
+- ONLY write about things explicitly stated in the reviews. If no review mentions a shuttle, do NOT mention a shuttle. If no review mentions valet service, do NOT describe valet. If no review mentions price, do NOT discuss pricing.
+- Before each sentence, silently verify: "Can I point to a specific review that says this?" If the answer is no, delete that sentence.
+- If the reviews are vague or short, keep the summary short and honest rather than filling space with assumptions.
+- A one-sentence mention of "ready when you arrive" does NOT mean valet service. Do not infer services that are not explicitly described.
+- Use the provider name "${providerName}" as-is. Do not add parentheticals, alternate names, or operating-as notes unless they appear in the reviews themselves.
 
 REVIEWS TO SUMMARIZE:
 ${reviewsText.substring(0, 8000)}`;

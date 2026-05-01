@@ -385,3 +385,17 @@ Way.com uses inconsistent type names: "Covered Self Park", "Outdoor Self Park". 
 **metadataBase:** Added `metadataBase: new URL("https://airportmatrix.com")` to root layout, eliminating localhost OG image warnings.
 
 **All 9 public pages now 100% I-Lang + Google SEO compliant.**
+
+### Homepage cache invalidation (2026-04-30)
+
+Parking CRUD now calls `revalidatePath("/")` alongside admin paths. Adding/editing/deleting a parking provider instantly refreshes the homepage (not just the admin table).
+
+### AI review summary improvements (2026-04-30)
+
+**Prompt overhaul:** Replaced rigid 6-sentence template with 3 flexible topics + explicit anti-template rules. Banned formulaic phrases ("standout feature", "ideal choice", "top-tier option", generic closings). Temperature raised 0.5→0.7.
+
+**Anti-fabrication rules:** Added verification step — before each sentence, AI must confirm a specific review supports it. No shuttle in reviews → no shuttle in summary. No valet mentioned → no valet described. Short/vague reviews → short honest summary.
+
+**Placeholder text:** Empty "What Travelers Say" now shows natural text ("Check back soon for a summary...") instead of admin-facing message.
+
+**Anti-fabrication — provider name:** Added rule preventing AI from embellishing provider names with parentheticals, alternate names, or "operating as" notes unless those appear in the actual reviews.
