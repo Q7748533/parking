@@ -131,9 +131,58 @@ export default async function StateParkingPage({
     ],
   };
 
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `Airports with Parking in ${stateInfo.name}`,
+    numberOfItems: airports.length,
+    itemListElement: airports.map((a, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Airport",
+        "@id": `https://airportmatrix.com/airport/${a.code.toLowerCase()}`,
+        name: a.name,
+        iataCode: a.code,
+        address: { "@type": "PostalAddress", addressLocality: a.city, addressRegion: stateInfo.code, addressCountry: "US" },
+        url: `https://airportmatrix.com/airport/${a.code.toLowerCase()}`,
+      },
+    })),
+  };
+
+  const iLangMetadata = {
+    "@context": "https://ilang.ai",
+    "@type": "ContentLayer",
+    protocol: "I-Lang_v2.0",
+    passage: `AirportMatrix.StateParking.${stateInfo.code}`,
+    temporal: "T[0]",
+    narrative_voice: "directory_index",
+    layers: {
+      text: {
+        h1: `Airport Parking in ${stateInfo.name}`,
+        h2: [`${stateInfo.name} Airports`, "Nearby States"],
+        state: { system: "AirportMatrix", purpose: "state_airport_parking_directory", coverage: `${airports.length} airports in ${stateInfo.code}` },
+        act: { actor: "@SYSTEM{AirportMatrix}", action: "LIST_AIRPORTS_BY_STATE(${stateInfo.code})", target: "@HUMAN{traveler}" },
+      },
+      business: {
+        discover: `${stateInfo.code}_airport_parking_coverage`,
+        gene_immutable: { id: "regional_coverage", constraint: "list_all_state_airports_with_parking", violation: "missing_airports → incomplete_directory" },
+        emotion_field: { confidence: 0.9 },
+      },
+      user_journey: {
+        entry: `browse_${stateInfo.code.toLowerCase()}_airport_parking`,
+        pattern: "scan_state_list → select_airport → view_parking_options → compare_and_book",
+        decision_factors: ["airport_proximity", "parking_availability", "price_range"],
+      },
+    },
+    origin: { author: "@SYSTEM{AirportMatrix}", project: "airport-parking-aggregator", license: "commercial", hash: `λ_state_${stateInfo.code}_0x${stateInfo.code}` },
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
+      <script type="application/ilang+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(iLangMetadata) }} />
       <section className="bg-white border-b border-gray-200 py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <a href="/airports" className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 mb-4 transition-colors">

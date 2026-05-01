@@ -48,8 +48,9 @@
 - **Dynamic meta:** Every page's title and description are built from real DB data (prices, counts, types)
 - **ISR:** All public pages `revalidate = 3600`, admin pages dynamic
 - **E-E-A-T signals:** Stats bar on homepage, rating breakdown on detail pages, "What Travelers Say" AI summary, Organization+AboutPage+ContactPage schema
-- **Cross-reference:** "More Parking at {airportCode}" section on parking detail pages
-- **SEO infrastructure:** robots.txt, sitemap.xml (dynamic), custom 404, `metadataBase` configured, OG images
+- **Cross-reference:** "More Parking at {airportCode}" on parking detail; "Nearby Airports" on airport detail (same state); "All {state} airports" state aggregation pages
+- **State aggregation:** `/airport-parking/[state]` — 50 states, dynamic airport cards + parking counts, I-Lang + ItemList schema
+- **SEO infrastructure:** robots.txt, sitemap.xml (dynamic, includes states), custom 404, `metadataBase` configured, OG images
 
 ## Architectural Decisions
 

@@ -411,3 +411,5 @@ Parking CRUD now calls `revalidatePath("/")` alongside admin paths. Adding/editi
 **State pages:** Created `/airport-parking/[state]` dynamic route. Covers all 50 states via SLUG_TO_STATE map. Each page shows all airports in that state as clickable cards with parking count. Breadcrumb + meta description dynamic. Added to sitemap.
 
 **Nearby airports:** Created `NearbyAirports` server component on airport detail page. Queries other airports in same state (up to 4) + "All {state} airports →" link to state page. Boosts internal linking and dwell time.
+
+**State pages I-Lang/SEO:** Added I-Lang ContentLayer (H1+H2), ItemList schema with Airport+PostalAddress items, dynamic meta per state. Now fully compliant.
