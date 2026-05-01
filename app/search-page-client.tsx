@@ -211,7 +211,7 @@ export function SearchPageClient({ airportsWithParking, totalAirports = 0, total
                             </tr>
                           </thead>
                           <tbody>
-                            {getSortedProviders(airport.parkingProviders).slice(0, 5).map((provider) => (
+                            {getSortedProviders(airport.parkingProviders).slice(0, 10).map((provider) => (
                               <tr
                                 key={provider.id}
                                 className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
@@ -245,7 +245,7 @@ export function SearchPageClient({ airportsWithParking, totalAirports = 0, total
 
                       {/* Mobile Cards (shown only on mobile) */}
                       <div className="md:hidden space-y-3">
-                        {getSortedProviders(airport.parkingProviders).slice(0, 5).map((provider, idx) => (
+                        {getSortedProviders(airport.parkingProviders).slice(0, 10).map((provider, idx) => (
                           <a
                             key={provider.id}
                             href={`/airport/${airport.code.toLowerCase()}/${provider.slug}`}
