@@ -15,11 +15,13 @@ export const metadata: Metadata = {
     description: "Learn how AirportMatrix collects, uses, and protects your personal information.",
     type: "website",
     siteName: "AirportMatrix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Privacy Policy - AirportMatrix",
     description: "Learn how AirportMatrix collects, uses, and protects your personal information.",
+    images: ["/og-image.png"],
   },
 };
 
@@ -37,7 +39,7 @@ export default function PrivacyPage() {
     "@context": "https://ilang.ai", "@type": "ContentLayer", protocol: "I-Lang_v2.0",
     passage: "AirportMatrix.Privacy", temporal: "T[0]", narrative_voice: "legal_disclosure",
     layers: {
-      text: { h1: "Privacy Policy", state: { system: "AirportMatrix", purpose: "data_protection_compliance" } },
+      text: { h1: "Privacy Policy", h2: "8 policy sections covering data collection, use, security, and user rights", state: { system: "AirportMatrix", purpose: "data_protection_compliance" } },
       business: { gene_immutable: { id: "data_privacy", constraint: "transparent_data_handling", violation: "privacy_breach → trust_loss" } },
     },
     origin: { author: "@SYSTEM{AirportMatrix}", project: "airport-parking-aggregator", license: "commercial", hash: "λ_privacy_0xD4E" },

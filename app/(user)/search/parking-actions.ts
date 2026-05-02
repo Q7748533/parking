@@ -40,6 +40,7 @@ export type ParkingDetail = {
   shuttleReccPercentage: number;
   freeCancelAvailable: boolean;
   reviewAiSummary: string;
+  additionalFees: string;
   created_at: string;
   updated_at: string;
 };
@@ -115,6 +116,7 @@ export async function getParkingDetail(idOrSlug: string) {
       shuttleReccPercentage: Number(row.shuttle_recc_percentage || 0),
       freeCancelAvailable: Boolean(row.free_cancel_available),
       reviewAiSummary: String(row.review_ai_summary || ""),
+      additionalFees: String(row.additional_fees || ""),
       created_at: String(row.created_at),
       updated_at: String(row.updated_at),
     };

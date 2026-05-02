@@ -199,6 +199,29 @@ function normalizeType(raw: string): string {
     .trim();
 }
 
+/** Extract additional fee info from parkingAccess or customMessage text */
+function extractAdditionalFees(jsonData: RawParkingJson): string | undefined {
+  const sources = [jsonData.parkingAccess, jsonData.customMessage].filter(Boolean);
+  for (const text of sources) {
+    if (!text) continue;
+    const cleaned = text.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    // Match patterns like: "SUV: $5/day", "Large SUV / Truck: $7 per day", "Oversized vehicle: $10/day"
+    const patterns = [
+      /(?:SUV|Truck|Oversized|Large|Mini.?Van|Extra.?Day|Oversize).*?\$\d[\d.]*(?:\s*(?:\/|per)\s*day)?/gi,
+      /(?:additional|extra|surcharge).*?(?:fee|charge|cost)/gi,
+    ];
+    const matches: string[] = [];
+    for (const pattern of patterns) {
+      const found = cleaned.match(pattern);
+      if (found) matches.push(...found);
+    }
+    if (matches.length > 0) {
+      return [...new Set(matches)].join(" | ");
+    }
+  }
+  return undefined;
+}
+
 function extractBasicData(jsonData: RawParkingJson): ParkingFormData {
   const parkingType = jsonData.parkingTypes?.[0] ?? {};
   const amenitiesList = jsonData.amenities?.map((a) => a.amenityName).filter(Boolean) ?? [];
@@ -245,6 +268,7 @@ function extractBasicData(jsonData: RawParkingJson): ParkingFormData {
     beenHereCount: jsonData.beenHereCount ?? 0,
     shuttleReccPercentage: jsonData.shuttleReccPercentage ?? 0,
     freeCancelAvailable: Boolean(parkingType.freeCancelAvailable),
+    additionalFees: extractAdditionalFees(jsonData),
   };
 }
 

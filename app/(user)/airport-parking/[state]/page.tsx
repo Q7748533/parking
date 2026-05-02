@@ -106,7 +106,15 @@ export async function generateMetadata({
       title: `Airport Parking in ${stateInfo.name}`,
       description: `Find the best airport parking deals in ${stateInfo.name}.`,
       type: "website",
+      locale: "en_US",
       siteName: "AirportMatrix",
+      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Airport Parking in ${stateInfo.name}`,
+      description: `Find the best airport parking deals in ${stateInfo.name}.`,
+      images: ["/og-image.png"],
     },
   };
 }
@@ -161,7 +169,7 @@ export default async function StateParkingPage({
     layers: {
       text: {
         h1: `Airport Parking in ${stateInfo.name}`,
-        h2: [`${stateInfo.name} Airports`, "Nearby States"],
+        h2: `Airport listing cards for ${stateInfo.name}`,
         state: { system: "AirportMatrix", purpose: "state_airport_parking_directory", coverage: `${airports.length} airports in ${stateInfo.code}` },
         act: { actor: "@SYSTEM{AirportMatrix}", action: "LIST_AIRPORTS_BY_STATE(${stateInfo.code})", target: "@HUMAN{traveler}" },
       },

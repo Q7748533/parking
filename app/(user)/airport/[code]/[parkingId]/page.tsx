@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: ParkingPageProps): Promise<Me
   const desc = `${cleanName} at ${parking.airportCode} Airport — ${parking.type || "parking"} from ${priceStr}. ${parking.distance ? `${parking.distance} from terminal. ` : ""}${parking.shuttleService ? "Free shuttle included. " : ""}${parking.freeCancelAvailable ? "Free cancellation. " : ""}Book now at AirportMatrix.`;
 
   return {
-    title: `${cleanName} — ${priceStr} at ${parking.airportCode} Airport | AirportMatrix`,
+    title: `${cleanName} at ${parking.airportCode} | AirportMatrix`,
     description: desc.substring(0, 160),
     keywords: [`${parking.airportCode} parking`, `${cleanName}`, `${parking.airportCode} ${parking.type} parking`, "airport parking"],
     robots: { index: true, follow: true },
@@ -38,11 +38,13 @@ export async function generateMetadata({ params }: ParkingPageProps): Promise<Me
       type: "website",
       locale: "en_US",
       siteName: "AirportMatrix",
+      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title: `${cleanName} — ${priceStr} at ${parking.airportCode}`,
       description: desc.substring(0, 200),
+      images: ["/og-image.png"],
     },
     alternates: {
       canonical: `/airport/${parking.airportCode.toLowerCase()}/${parking.slug || parkingId}`,
@@ -131,10 +133,11 @@ export default async function ParkingPage({ params }: ParkingPageProps) {
       text: {
         h1: cleanName,
         h2: [
-          "Traveler Insights",
+          "What Travelers Say",
           "Amenities & Services",
           `More Parking at ${parking.airportCode}`,
         ],
+        h3: ["Rating Breakdown", "Operating Hours", "Shuttle Service", "Cancellation Policy", "Parking Access", "Location Type"],
         state: { system: "AirportMatrix", subject: cleanName, location: `${parking.airportCode}` },
         act: { actor: "@SYSTEM{AirportMatrix}", action: "DISPLAY_DETAIL(parking_provider)", target: "@HUMAN{traveler}" },
         properties: { price: parking.pricePerDay, distance: parking.distance, rating: parking.rating, type: parking.type },

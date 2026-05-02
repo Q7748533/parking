@@ -15,11 +15,13 @@ export const metadata: Metadata = {
     description: "We help travelers find and compare the best airport parking deals across 500+ US airports.",
     type: "website",
     siteName: "AirportMatrix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "About AirportMatrix - Your Airport Parking Comparison Tool",
     description: "We help travelers find and compare the best airport parking deals across 500+ US airports.",
+    images: ["/og-image.png"],
   },
 };
 
@@ -37,7 +39,7 @@ export default function AboutPage() {
     "@context": "https://ilang.ai", "@type": "ContentLayer", protocol: "I-Lang_v2.0",
     passage: "AirportMatrix.About", temporal: "T[0]", narrative_voice: "brand_story",
     layers: {
-      text: { h1: "About AirportMatrix", state: { system: "AirportMatrix", purpose: "transparent_parking_comparison" } },
+      text: { h1: "About AirportMatrix", h2: ["Our Mission", "How It Works", "Why Choose AirportMatrix"], state: { system: "AirportMatrix", purpose: "transparent_parking_comparison" } },
       business: { discover: "airport_parking_value_proposition", emotion_field: { trust: 0.95, reliability: 0.9 } },
     },
     origin: { author: "@SYSTEM{AirportMatrix}", project: "airport-parking-aggregator", license: "commercial", hash: "λ_about_0xB1A" },

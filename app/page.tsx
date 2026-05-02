@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
   } catch { /* fallback */ }
 
   return {
-    title: "AirportMatrix — Airport Parking Price Comparison | Find & Book Deals",
+    title: `AirportMatrix — Compare ${count}+ Airport Parking Deals`,
     description: `Compare airport parking prices at ${count}+ US airports. Find cheap long-term parking with free shuttle, secure lots, and instant confirmation. Save up to 60% vs drive-up rates.`,
     keywords: ["airport parking", "cheap airport parking", "long term parking", "airport parking deals", "airport shuttle parking", "airport parking reservations"],
     openGraph: {
@@ -26,11 +26,13 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       locale: "en_US",
       siteName: "AirportMatrix",
+      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title: "AirportMatrix — Find & Book Airport Parking Deals",
       description: `Find the best airport parking deals at ${count}+ US airports. Save up to 60%.`,
+      images: ["/og-image.png"],
     },
     alternates: {
       canonical: "/",

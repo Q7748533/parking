@@ -28,6 +28,7 @@ async function migrate() {
     "ALTER TABLE parking_providers ADD COLUMN shuttle_recc_percentage REAL DEFAULT 0",
     "ALTER TABLE parking_providers ADD COLUMN free_cancel_available INTEGER DEFAULT 0",
     "ALTER TABLE parking_providers ADD COLUMN review_ai_summary TEXT",
+    "ALTER TABLE parking_providers ADD COLUMN additional_fees TEXT",
   ];
 
   for (const sql of migrations) {

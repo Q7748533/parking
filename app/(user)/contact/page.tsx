@@ -15,11 +15,13 @@ export const metadata: Metadata = {
     description: "Get in touch with the AirportMatrix team for questions, feedback, or partnership inquiries.",
     type: "website",
     siteName: "AirportMatrix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact AirportMatrix - We're Here to Help",
     description: "Get in touch with the AirportMatrix team for questions, feedback, or partnership inquiries.",
+    images: ["/og-image.png"],
   },
 };
 
@@ -37,7 +39,7 @@ export default function ContactPage() {
     "@context": "https://ilang.ai", "@type": "ContentLayer", protocol: "I-Lang_v2.0",
     passage: "AirportMatrix.Contact", temporal: "T[0]", narrative_voice: "support_channel",
     layers: {
-      text: { h1: "Contact Us", state: { system: "AirportMatrix", purpose: "customer_support" } },
+      text: { h1: "Contact Us", h2: ["General Inquiries", "Partnerships", "Response Time"], state: { system: "AirportMatrix", purpose: "customer_support" } },
       business: { discover: "support_channel_discovery", emotion_field: { approachability: 0.95, responsiveness: 0.9 } },
     },
     origin: { author: "@SYSTEM{AirportMatrix}", project: "airport-parking-aggregator", license: "commercial", hash: "λ_contact_0xC3D" },

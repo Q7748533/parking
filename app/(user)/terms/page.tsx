@@ -15,11 +15,13 @@ export const metadata: Metadata = {
     description: "Read the terms and conditions governing your use of AirportMatrix.",
     type: "website",
     siteName: "AirportMatrix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Terms of Service - AirportMatrix",
     description: "Read the terms and conditions governing your use of AirportMatrix.",
+    images: ["/og-image.png"],
   },
 };
 
@@ -37,7 +39,7 @@ export default function TermsPage() {
     "@context": "https://ilang.ai", "@type": "ContentLayer", protocol: "I-Lang_v2.0",
     passage: "AirportMatrix.Terms", temporal: "T[0]", narrative_voice: "legal_disclosure",
     layers: {
-      text: { h1: "Terms of Service", state: { system: "AirportMatrix", purpose: "terms_and_conditions" } },
+      text: { h1: "Terms of Service", h2: "9 sections covering acceptance, service description, liability, and user obligations", state: { system: "AirportMatrix", purpose: "terms_and_conditions" } },
       business: { gene_immutable: { id: "affiliate_transparency", constraint: "disclose_affiliate_relationships", violation: "hidden_commissions → legal_risk" } },
     },
     origin: { author: "@SYSTEM{AirportMatrix}", project: "airport-parking-aggregator", license: "commercial", hash: "λ_terms_0xE5F" },

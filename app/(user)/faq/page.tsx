@@ -15,11 +15,13 @@ export const metadata: Metadata = {
     description: "Find answers to common questions about airport parking reservations, pricing, cancellation policies, and more.",
     type: "website",
     siteName: "AirportMatrix",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Airport Parking FAQ - Answers to Your Parking Questions",
     description: "Find answers to common questions about airport parking reservations, pricing, cancellation policies, and more.",
+    images: ["/og-image.png"],
   },
 };
 
@@ -93,7 +95,7 @@ export default function FAQPage() {
     "@context": "https://ilang.ai", "@type": "ContentLayer", protocol: "I-Lang_v2.0",
     passage: "AirportMatrix.FAQ", temporal: "T[0]", narrative_voice: "knowledge_base",
     layers: {
-      text: { h1: "Frequently Asked Questions", state: { system: "AirportMatrix", purpose: "user_education" } },
+      text: { h1: "Frequently Asked Questions", h2: "10 FAQ items about airport parking, reservations, and policies", state: { system: "AirportMatrix", purpose: "user_education" } },
       business: { discover: "common_parking_questions", emotion_field: { helpfulness: 0.95, clarity: 0.9 } },
     },
     origin: { author: "@SYSTEM{AirportMatrix}", project: "airport-parking-aggregator", license: "commercial", hash: "λ_faq_0xA2C" },

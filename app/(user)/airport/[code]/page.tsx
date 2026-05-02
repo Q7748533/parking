@@ -83,8 +83,8 @@ export async function generateMetadata({ params }: AirportPageProps): Promise<Me
   }
 
   return {
-    title: `${airport.name} (${airport.code}) Parking - Compare & Book Deals | AirportMatrix`,
-    description: `Find cheap ${airport.name} (${airport.code}) parking. Compare prices, shuttle services, covered and valet parking options near ${airport.city}, ${airport.state}. Save up to 60% on airport parking.`,
+    title: `${airport.code} Airport Parking — Compare & Save | AirportMatrix`,
+    description: `Find cheap ${airport.name} (${airport.code}) parking. Compare prices, shuttle, covered and valet parking near ${airport.city}, ${airport.state}. Save up to 60%.`,
     robots: { index: true, follow: true },
     keywords: [
       `${airport.code} parking`,
@@ -95,16 +95,18 @@ export async function generateMetadata({ params }: AirportPageProps): Promise<Me
       "long term parking",
     ],
     openGraph: {
-      title: `${airport.name} Parking - Compare & Book Deals`,
+      title: `${airport.code} Airport Parking — Compare & Save`,
       description: `Find the best parking deals at ${airport.name}. Save up to 60%.`,
       type: "website",
       locale: "en_US",
       siteName: "AirportMatrix",
+      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${airport.name} Parking - Compare & Book Deals`,
+      title: `${airport.code} Airport Parking — Compare & Save`,
       description: `Find the best parking deals at ${airport.name}. Save up to 60%.`,
+      images: ["/og-image.png"],
     },
     alternates: {
       canonical: `/airport/${code.toLowerCase()}`,
@@ -253,9 +255,11 @@ export default async function AirportPage({ params }: AirportPageProps) {
       text: {
         h1: `${airport.name} (${airport.code}) Parking`,
         h2: [
+          `About ${airport.name} Parking`,
           `${airport.code} Parking FAQ`,
           `More Airport Parking in ${airport.state}`,
         ],
+        h3: ["How much is parking?", "What types are available?", "Does it have shuttle?"],
         state: { system: "AirportMatrix", location: airport.code, purpose: "airport_parking_listing" },
         act: { actor: "@SYSTEM{AirportMatrix}", action: "LIST(parking_options → sorted_by_price)", target: "@HUMAN{traveler}" },
       },

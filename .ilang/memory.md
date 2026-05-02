@@ -85,4 +85,13 @@
   ::FACT{ADMIN_PASSWORD_env_var_server_action_comparison}
   ::FACT{httpOnly_cookie_7_day_expiry}
   ::FACT{logout_button_in_admin_sidebar}
+  ::FACT{login_route_fixed_app_admin_login_not_route_group}
+  ::FACT{all_10_pages_OG_Twitter_images_added}
+  ::FACT{title_lengths_shortened_under_60_chars}
+  ::FACT{I-Lang_H2_H3_complete_across_all_pages}
+  ::FACT{Twitter_card_summary_→_summary_large_image_on_privacy_terms}
+::DECISION{id:additional_fees_field|conf:confirmed}
+  ::FACT{DB_column_additional_fees_TEXT_added_via_migration}
+  ::FACT{extractAdditionalFees_parses_SUV_truck_oversized_surcharge_from_text}
+  ::FACT{displayed_in_detail_page_sidebar_below_location_type}
   ::FACT{info_pages_OrganizationSchema_Fragment_wrapper_fix}

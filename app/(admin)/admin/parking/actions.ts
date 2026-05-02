@@ -54,6 +54,7 @@ export type ParkingFormData = {
   shuttleReccPercentage?: number;
   freeCancelAvailable?: boolean;
   reviewAiSummary?: string;
+  additionalFees?: string;
 };
 
 export type ParkingProvider = {
@@ -95,6 +96,7 @@ export type ParkingProvider = {
   shuttleReccPercentage?: number;
   freeCancelAvailable?: boolean;
   reviewAiSummary?: string;
+  additionalFees?: string;
   created_at: string;
   updated_at: string;
 };
@@ -147,6 +149,7 @@ function rowToParking(row: Record<string, unknown>): ParkingProvider {
     shuttleReccPercentage: row.shuttle_recc_percentage ? Number(row.shuttle_recc_percentage) : 0,
     freeCancelAvailable: row.free_cancel_available ? Boolean(row.free_cancel_available) : false,
     reviewAiSummary: row.review_ai_summary ? String(row.review_ai_summary) : undefined,
+    additionalFees: row.additional_fees ? String(row.additional_fees) : undefined,
     created_at: String(row.created_at),
     updated_at: String(row.updated_at),
   };
@@ -262,8 +265,8 @@ export async function createParkingProvider(data: ParkingFormData) {
              parking_access, custom_message, rating, rating_count, recommendation_percentage,
              contact_phone, location_type, strike_off_price, discount_percentage,
              operating_hours, amenities, review_summary, been_here_count,
-             shuttle_recc_percentage, free_cancel_available, review_ai_summary)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+             shuttle_recc_percentage, free_cancel_available, review_ai_summary, additional_fees)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       args: [
         id, data.name, slug, data.airportId, data.type, data.pricePerDay, data.distance, 
         data.features, data.affiliateUrl, data.description || null, data.addressLine1 || null,
@@ -275,7 +278,7 @@ export async function createParkingProvider(data: ParkingFormData) {
         data.strikeOffPrice || 0, data.discountPercentage || 0, data.operatingHours || null,
         data.amenities || null, data.reviewSummary || null, data.beenHereCount || 0,
         data.shuttleReccPercentage || 0, data.freeCancelAvailable ? 1 : 0,
-        data.reviewAiSummary || null,
+        data.reviewAiSummary || null, data.additionalFees || null,
       ],
     });
     revalidatePath("/(admin)/admin/parking");
@@ -355,7 +358,8 @@ export async function updateParkingProvider(id: string, data: ParkingFormData) {
             contact_phone = ?, location_type = ?, strike_off_price = ?,
             discount_percentage = ?, operating_hours = ?, amenities = ?,
             review_summary = ?, been_here_count = ?, shuttle_recc_percentage = ?,
-            free_cancel_available = ?, review_ai_summary = ?, updated_at = CURRENT_TIMESTAMP
+            free_cancel_available = ?, review_ai_summary = ?, additional_fees = ?,
+            updated_at = CURRENT_TIMESTAMP
             WHERE id = ?`,
       args: [
         data.name, slug, data.airportId, data.type, data.pricePerDay, data.distance,
@@ -368,7 +372,7 @@ export async function updateParkingProvider(id: string, data: ParkingFormData) {
         data.strikeOffPrice || 0, data.discountPercentage || 0, data.operatingHours || null,
         data.amenities || null, data.reviewSummary || null, data.beenHereCount || 0,
         data.shuttleReccPercentage || 0, data.freeCancelAvailable ? 1 : 0,
-        data.reviewAiSummary || null, id,
+        data.reviewAiSummary || null, data.additionalFees || null, id,
       ],
     });
     revalidatePath("/(admin)/admin/parking");

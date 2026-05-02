@@ -56,6 +56,7 @@ const defaultFormData: ParkingFormData = {
   beenHereCount: 0,
   shuttleReccPercentage: 0,
   freeCancelAvailable: false,
+  additionalFees: "",
   reviewAiSummary: "",
 };
 
@@ -112,6 +113,7 @@ export function ParkingDialog({ open, onOpenChange, provider, onSuccess }: Parki
           shuttleReccPercentage: provider.shuttleReccPercentage,
           freeCancelAvailable: provider.freeCancelAvailable,
           reviewAiSummary: provider.reviewAiSummary,
+          additionalFees: provider.additionalFees,
         });
         setReviewSummary(provider.reviewAiSummary || "");
       } else {

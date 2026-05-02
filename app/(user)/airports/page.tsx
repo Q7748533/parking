@@ -9,20 +9,23 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const airports = await getAirports();
   return {
-    title: `All US Airports — ${airports.length} Airports with Parking | AirportMatrix`,
-    description: `Browse all ${airports.length} US airports with parking options. Compare airport parking at JFK, LAX, Chicago ORD, Atlanta ATL, Dallas DFW, Miami MIA and more. Find the best deals.`,
+    title: `${airports.length} US Airports with Parking | AirportMatrix`,
+    description: `Browse all ${airports.length} US airports with parking options. Compare airport parking at JFK, LAX, Chicago ORD, Atlanta ATL, Dallas DFW, Miami MIA and more.`,
     alternates: { canonical: "/airports" },
     robots: { index: true, follow: true },
     openGraph: {
       title: `All US Airports — Airport Parking Directory`,
-      description: `Browse ${airports.length} US airports with available parking options. Find the best airport parking deals.`,
+      description: `Browse ${airports.length} US airports with available parking options.`,
       type: "website",
+      locale: "en_US",
       siteName: "AirportMatrix",
+      images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
       title: `All US Airports — Airport Parking Directory`,
       description: `Browse ${airports.length} US airports with available parking options.`,
+      images: ["/og-image.png"],
     },
     keywords: ["US airports", "airport parking directory", "airport list", "JFK parking", "LAX parking", "ORD parking"],
   };
