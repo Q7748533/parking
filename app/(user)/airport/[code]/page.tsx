@@ -223,6 +223,11 @@ export default async function AirportPage({ params }: AirportPageProps) {
           reviewCount: Number(p.rating_count) || 0,
           bestRating: 5,
         },
+        review: {
+          "@type": "Review",
+          author: { "@type": "Organization", name: "AirportMatrix" },
+          reviewRating: { "@type": "Rating", ratingValue: Number(p.rating) || 0, bestRating: 5 },
+        },
         offers: {
           "@type": "Offer",
           price: p.pricePerDay,

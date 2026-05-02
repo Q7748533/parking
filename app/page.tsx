@@ -225,6 +225,15 @@ export default async function HomePage() {
                         reviewCount: p.ratingCount || 0,
                         bestRating: 5,
                       },
+                      review: {
+                        "@type": "Review",
+                        author: { "@type": "Organization", name: "AirportMatrix" },
+                        reviewRating: {
+                          "@type": "Rating",
+                          ratingValue: p.rating,
+                          bestRating: 5,
+                        },
+                      },
                     } : {}),
                     offers: {
                       "@type": "Offer",
