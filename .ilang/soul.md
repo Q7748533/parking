@@ -13,6 +13,7 @@
   T:slug_stored_in_DB_no_runtime_fallback
   T:parking_type_normalized_via_normalizeType
   T:shared_header_footer_via_user_layout
+  T:admin_auth_middleware_cookie_ADMIN_PASSWORD_env
   A:client_side_only_validation⇒security_risk
   A:runtime_slug_generation⇒unstable_URLs
 ::GENE{seo_patterns|conf:confirmed}

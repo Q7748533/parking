@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { LoginForm } from "./login-form";
+import { LoginForm } from "@/app/(admin)/login/login-form";
 
 export const metadata: Metadata = {
   title: "Admin Login - AirportMatrix",
@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default async function LoginPage() {
-  // Already logged in → redirect to admin
   const cookieStore = await cookies();
   if (cookieStore.get("admin_auth")?.value === "authenticated") {
     redirect("/admin");

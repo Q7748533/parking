@@ -79,3 +79,10 @@
 ::DECISION{id:memory_migrated_to_I_Lang_v3_0|conf:confirmed}
   ::FACT{soul_md_→_DNA_CORE_GENE_LESSONS_tags}
   ::FACT{memory_md_→_SESSION_DECISION_FACT_tags_append_only}
+::DECISION{id:admin_authentication|conf:confirmed}
+  ::FILES{middleware.ts|admin/login/page.tsx|admin/login/actions.ts|admin/logout/actions.ts}
+  ::FACT{middleware_checks_admin_auth_cookie_redirects_to_login}
+  ::FACT{ADMIN_PASSWORD_env_var_server_action_comparison}
+  ::FACT{httpOnly_cookie_7_day_expiry}
+  ::FACT{logout_button_in_admin_sidebar}
+  ::FACT{info_pages_OrganizationSchema_Fragment_wrapper_fix}
