@@ -19,6 +19,9 @@ export default function ParkingPage() {
   const [providers, setProviders] = useState<ParkingProvider[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const pageSize = 20;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProvider, setEditingProvider] = useState<ParkingProvider | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -27,9 +30,10 @@ export default function ParkingPage() {
   const loadProviders = async () => {
     setIsLoading(true);
     setError(null);
-    const result = await getParkingProviders();
+    const result = await getParkingProviders(page, pageSize);
     if (result.success && result.data) {
       setProviders(result.data);
+      setTotal(result.total || 0);
     } else {
       setError(result.error || "Failed to load parking providers");
     }
@@ -38,7 +42,9 @@ export default function ParkingPage() {
 
   useEffect(() => {
     loadProviders();
-  }, []);
+  }, [page]);
+
+  const totalPages = Math.ceil(total / pageSize);
 
   const handleEdit = (provider: ParkingProvider) => {
     setEditingProvider(provider);
@@ -98,6 +104,31 @@ export default function ParkingPage() {
           onEdit={handleEdit}
           onDelete={handleDelete}
         />
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between mt-4 text-sm">
+            <span className="text-muted-foreground">
+              Showing {(page - 1) * pageSize + 1}–{Math.min(page * pageSize, total)} of {total}
+            </span>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page <= 1}
+                onClick={() => setPage((p) => p - 1)}
+              >
+                Previous
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page >= totalPages}
+                onClick={() => setPage((p) => p + 1)}
+              >
+                Next
+              </Button>
+            </div>
+          </div>
+        )}
       )}
 
       <ParkingDialog

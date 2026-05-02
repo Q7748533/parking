@@ -19,6 +19,9 @@ export default function AirportsPage() {
   const [airports, setAirports] = useState<Airport[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const pageSize = 20;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingAirport, setEditingAirport] = useState<Airport | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -27,9 +30,10 @@ export default function AirportsPage() {
   const loadAirports = async () => {
     setIsLoading(true);
     setError(null);
-    const result = await getAirports();
+    const result = await getAirports(page, pageSize);
     if (result.success && result.data) {
       setAirports(result.data);
+      setTotal(result.total || 0);
     } else {
       setError(result.error || "Failed to load airports");
     }
@@ -38,7 +42,9 @@ export default function AirportsPage() {
 
   useEffect(() => {
     loadAirports();
-  }, []);
+  }, [page]);
+
+  const totalPages = Math.ceil(total / pageSize);
 
   const handleEdit = (airport: Airport) => {
     setEditingAirport(airport);
@@ -105,6 +111,31 @@ export default function AirportsPage() {
           onEdit={handleEdit}
           onDelete={handleDelete}
         />
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between mt-4 text-sm">
+            <span className="text-muted-foreground">
+              显示 {(page - 1) * pageSize + 1}–{Math.min(page * pageSize, total)} 条，共 {total} 条
+            </span>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page <= 1}
+                onClick={() => setPage((p) => p - 1)}
+              >
+                上一页
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page >= totalPages}
+                onClick={() => setPage((p) => p + 1)}
+              >
+                下一页
+              </Button>
+            </div>
+          </div>
+        )}
       )}
 
       <AirportDialog
