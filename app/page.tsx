@@ -217,6 +217,7 @@ export default async function HomePage() {
                     "@type": "Product",
                     name: p.name,
                     description: `Parking at ${airport.name} (${airport.code})`,
+                    image: "https://airportmatrix.com/og-image.png",
                     ...(p.rating ? {
                       aggregateRating: {
                         "@type": "AggregateRating",
@@ -230,6 +231,14 @@ export default async function HomePage() {
                       price: p.pricePerDay,
                       priceCurrency: "USD",
                       availability: "https://schema.org/InStock",
+                      shippingDetails: { "@type": "ShippingDeliveryDetails", doesNotShip: true },
+                      hasMerchantReturnPolicy: {
+                        "@type": "MerchantReturnPolicy",
+                        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+                        merchantReturnDays: 0,
+                        returnMethod: "https://schema.org/ReturnAtKiosk",
+                        returnFees: "https://schema.org/FreeReturn",
+                      },
                     },
                     url: `https://airportmatrix.com/airport/${airport.code.toLowerCase()}/${p.slug}`,
                   },

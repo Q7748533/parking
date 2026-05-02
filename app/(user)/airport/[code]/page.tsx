@@ -215,13 +215,22 @@ export default async function AirportPage({ params }: AirportPageProps) {
       item: {
         "@type": "Product",
         name: p.name,
+        description: `Parking at ${airport.name} (${airport.code}) — ${p.type || "parking"} from $${p.pricePerDay.toFixed(2)}/day`,
+        image: "https://airportmatrix.com/og-image.png",
         aggregateRating: {
           "@type": "AggregateRating",
           ratingValue: Number(p.rating) || 0,
           reviewCount: Number(p.rating_count) || 0,
           bestRating: 5,
         },
-        offers: { "@type": "Offer", price: p.pricePerDay, priceCurrency: "USD", availability: "https://schema.org/InStock" },
+        offers: {
+          "@type": "Offer",
+          price: p.pricePerDay,
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          shippingDetails: { "@type": "ShippingDeliveryDetails", doesNotShip: true },
+          hasMerchantReturnPolicy: { "@type": "MerchantReturnPolicy", returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow", merchantReturnDays: 0 },
+        },
         url: `https://airportmatrix.com/airport/${airport.code.toLowerCase()}/${p.slug}`,
       },
     })),

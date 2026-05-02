@@ -82,7 +82,8 @@ export default async function ParkingPage({ params }: ParkingPageProps) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: cleanName,
-    description: parking.description,
+    description: parking.description || `${cleanName} at ${parking.airportCode} Airport`,
+    image: "https://airportmatrix.com/og-image.png",
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: parking.rating,
@@ -106,6 +107,14 @@ export default async function ParkingPage({ params }: ParkingPageProps) {
       price: parking.pricePerDay.toFixed(2),
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
+      shippingDetails: { "@type": "ShippingDeliveryDetails", doesNotShip: true },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 0,
+        returnMethod: "https://schema.org/ReturnAtKiosk",
+        returnFees: "https://schema.org/FreeReturn",
+      },
       url: `https://airportmatrix.com/airport/${parking.airportCode.toLowerCase()}/${parkingId}`,
     },
   };

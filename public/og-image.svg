@@ -1,0 +1,31 @@
+<svg width="1200" height="1200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1200" fill="#f5f7fa"/>
+  <rect x="60" y="60" width="1080" height="1080" rx="24" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+
+  <!-- Logo block -->
+  <rect x="480" y="300" width="240" height="240" rx="20" fill="#6366f1"/>
+  <text x="600" y="460" font-family="Arial, sans-serif" font-size="100" font-weight="bold" fill="white" text-anchor="middle">AM</text>
+
+  <!-- Title -->
+  <text x="600" y="650" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#1f2937" text-anchor="middle">
+    AIRPORT MATRIX
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="740" font-family="Arial, sans-serif" font-size="36" fill="#6366f1" font-weight="600" text-anchor="middle">
+    Find &amp; Book Airport Parking Deals
+  </text>
+
+  <!-- Stats -->
+  <text x="600" y="840" font-family="Arial, sans-serif" font-size="28" fill="#6b7280" text-anchor="middle">
+    500+ US Airports · Compare Prices · Save up to 60%
+  </text>
+
+  <!-- Divider -->
+  <line x1="350" y1="890" x2="850" y2="890" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- URL -->
+  <text x="600" y="940" font-family="Arial, sans-serif" font-size="24" fill="#9ca3af" text-anchor="middle">
+    airportmatrix.com
+  </text>
+</svg>

@@ -417,3 +417,9 @@ Parking CRUD now calls `revalidatePath("/")` alongside admin paths. Adding/editi
 **State pages I-Lang/SEO:** Added I-Lang ContentLayer (H1+H2), ItemList schema with Airport+PostalAddress items, dynamic meta per state. Now fully compliant.
 
 **Sitemap revalidation:** Added `revalidate = 1800` to sitemap.ts — regenerates from DB every 30 min instead of serving stale cache indefinitely.
+
+### Admin pagination + Schema fixes (2026-04-30)
+
+**Admin pagination:** Both airports and parking admin pages now paginate — 20 items/page, prev/next buttons, "Showing X–Y of Z" count. Backend already supported pagination; frontend now wired up.
+
+**Product schema aggregateRating:** Added `aggregateRating` to Product items in homepage ItemList and airport page ItemList. Resolves Google Search Console warning about missing review/aggregateRating fields. Also added `rating`/`ratingCount` to `ParkingProvider` type and `rowToProvider` mapping.
