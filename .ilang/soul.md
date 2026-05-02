@@ -66,4 +66,5 @@
 - **Error states:** Red banner + retry on `search-page-client` and `airport-parking-client`
 - **Debounce:** 200ms client-side search filter (no keystroke jank)
 - **Pagination:** Admin parking + airports pages — 20 items/page, prev/next, "Showing X–Y of Z"
-- **Schema:** Product items include `aggregateRating` in ItemList schemas (Google Search Console compliant)
+- **Schema:** Product items include `image`, `review`, `aggregateRating`, `shippingDetails`, `hasMerchantReturnPolicy` — Search Console compliant
+- **OG image:** `public/og-image.svg` — brand card (1200×1200) for social sharing and Schema image field

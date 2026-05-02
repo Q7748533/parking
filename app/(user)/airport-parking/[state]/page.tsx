@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MapPin, Plane } from "lucide-react";
 import { turso } from "@/lib/db";
+import { OrganizationSchema } from "@/components/schemas/organization-schema";
 
 export const revalidate = 3600;
 
@@ -180,8 +181,18 @@ export default async function StateParkingPage({
 
   return (
     <>
+      <OrganizationSchema />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: `Airport Parking in ${stateInfo.name}`,
+          description: `Browse ${airports.length} airports with parking in ${stateInfo.name}.`,
+          mainEntity: itemListSchema,
+        }),
+      }} />
       <script type="application/ilang+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(iLangMetadata) }} />
       <section className="bg-white border-b border-gray-200 py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

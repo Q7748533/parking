@@ -5,6 +5,7 @@ import { AirportParkingClient } from "./airport-parking-client";
 import { AirportSeoContent } from "./airport-seo-content";
 import { AirportFaq } from "./airport-faq";
 import { NearbyAirports } from "./nearby-airports";
+import { OrganizationSchema } from "@/components/schemas/organization-schema";
 
 export const revalidate = 3600;
 
@@ -247,15 +248,13 @@ export default async function AirportPage({ params }: AirportPageProps) {
     protocol: "I-Lang_v2.0",
     passage: `AirportMatrix.${airport.code}`,
     temporal: "T[0]",
-    narrative_voice: "listing_directory",
+    narrative_voice: "airport_detail",
     layers: {
       text: {
         h1: `${airport.name} (${airport.code}) Parking`,
         h2: [
-          "About Airport Parking",
-          `${airport.code} Parking Stats`,
-          "Parking Options Comparison Table",
           `${airport.code} Parking FAQ`,
+          `More Airport Parking in ${airport.state}`,
         ],
         state: { system: "AirportMatrix", location: airport.code, purpose: "airport_parking_listing" },
         act: { actor: "@SYSTEM{AirportMatrix}", action: "LIST(parking_options → sorted_by_price)", target: "@HUMAN{traveler}" },
@@ -276,6 +275,7 @@ export default async function AirportPage({ params }: AirportPageProps) {
 
   return (
     <>
+      <OrganizationSchema />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
       <script type="application/ilang+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(iLangMetadata) }} />

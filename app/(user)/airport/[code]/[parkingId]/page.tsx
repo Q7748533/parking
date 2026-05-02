@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getParkingDetail, getOtherParkingAtAirport, OtherParkingOption } from "../../../search/parking-actions";
 import { ParkingDetailClient } from "./parking-detail-client";
+import { OrganizationSchema } from "@/components/schemas/organization-schema";
 
 export const revalidate = 3600;
 
@@ -154,6 +155,7 @@ export default async function ParkingPage({ params }: ParkingPageProps) {
 
   return (
     <>
+      <OrganizationSchema />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <script type="application/ilang+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(iLangMetadata) }} />

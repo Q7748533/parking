@@ -84,7 +84,7 @@ function buildILangMetadata(totalAirports: number) {
           "Airport Parking Options Explained",
           "Top Airports We Cover",
         ],
-        h3: "parking_options_by_airport (dynamic from database)",
+        h3: null,
         state: {
           system: "AirportMatrix",
           purpose: "airport_parking_price_comparison",

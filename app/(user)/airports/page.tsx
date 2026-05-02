@@ -68,7 +68,7 @@ const iLangMetadata = (count: number) => ({
   layers: {
     text: {
       h1: "All US Airports",
-      h2: ["Airport Parking Directory", "Browse by Airport Code"],
+      h2: ["Airport Parking Directory"],
       state: { system: "AirportMatrix", purpose: "airport_parking_directory", coverage: `${count}+ airports` },
       act: { actor: "@SYSTEM{AirportMatrix}", action: "LIST_ALL(airports → grouped_by_code)", target: "@HUMAN{traveler}" },
     },

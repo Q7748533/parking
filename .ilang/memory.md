@@ -420,6 +420,10 @@ Parking CRUD now calls `revalidatePath("/")` alongside admin paths. Adding/editi
 
 ### Admin pagination + Schema fixes (2026-04-30)
 
-**Admin pagination:** Both airports and parking admin pages now paginate — 20 items/page, prev/next buttons, "Showing X–Y of Z" count. Backend already supported pagination; frontend now wired up.
+**Admin pagination:** Both airports and parking admin pages now paginate — 20 items/page, prev/next buttons, "Showing X–Y of Z" count.
 
-**Product schema aggregateRating:** Added `aggregateRating` to Product items in homepage ItemList and airport page ItemList. Resolves Google Search Console warning about missing review/aggregateRating fields. Also added `rating`/`ratingCount` to `ParkingProvider` type and `rowToProvider` mapping.
+**Product schema complete:** Added `image`, `review`, `description`, `shippingDetails` (doesNotShip), `hasMerchantReturnPolicy` to all 3 Product schema locations. Created `public/og-image.svg` brand image (1200×1200).
+
+**Shared Organization schema:** Created `components/schemas/organization-schema.tsx` — reusable WebSite+Organization component with dynamic airport count. Imported on all 10 public pages. Every page now has site-wide entity signals.
+
+**I-Lang alignment:** Fixed H2 arrays to match actual DOM across all pages. Removed placeholder H3 from homepage. Changed `narrative_voice` to `airport_detail` on airport page. Added `CollectionPage` schema to state aggregation pages.

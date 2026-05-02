@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { InfoPageShell } from "../info-page-shell";
+import { OrganizationSchema } from "@/components/schemas/organization-schema";
 
 export const revalidate = 3600;
 
@@ -59,6 +60,7 @@ export default function ContactPage() {
   };
 
   return (
+    <OrganizationSchema />
     <InfoPageShell title="Contact Us">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }} />
