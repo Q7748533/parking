@@ -44,8 +44,9 @@ export default function PrivacyPage() {
   };
 
   return (
-    <OrganizationSchema />
-    <InfoPageShell title="Privacy Policy">
+    <>
+      <OrganizationSchema />
+      <InfoPageShell title="Privacy Policy">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ilang+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(iLangMetadata) }} />
       <div className="bg-white rounded-lg border border-gray-200 p-6 sm:p-8">
@@ -129,5 +130,6 @@ export default function PrivacyPage() {
         </div>
       </div>
     </InfoPageShell>
+    </>
   );
 }

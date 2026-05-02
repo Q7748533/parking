@@ -60,8 +60,9 @@ export default function ContactPage() {
   };
 
   return (
-    <OrganizationSchema />
-    <InfoPageShell title="Contact Us">
+    <>
+      <OrganizationSchema />
+      <InfoPageShell title="Contact Us">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }} />
       <script type="application/ilang+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(iLangMetadata) }} />
@@ -133,5 +134,6 @@ export default function ContactPage() {
         </div>
       </div>
     </InfoPageShell>
+    </>
   );
 }

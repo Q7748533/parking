@@ -100,8 +100,9 @@ export default function FAQPage() {
   };
 
   return (
-    <OrganizationSchema />
-    <InfoPageShell title="FAQ">
+    <>
+      <OrganizationSchema />
+      <InfoPageShell title="FAQ">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script
         type="application/ld+json"
@@ -138,5 +139,6 @@ export default function FAQPage() {
         </div>
       </div>
     </InfoPageShell>
+    </>
   );
 }

@@ -59,8 +59,9 @@ export default function AboutPage() {
   };
 
   return (
-    <OrganizationSchema />
-    <InfoPageShell title="About Us">
+    <>
+      <OrganizationSchema />
+      <InfoPageShell title="About Us">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }} />
       <script type="application/ilang+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(iLangMetadata) }} />
@@ -149,5 +150,6 @@ export default function AboutPage() {
         </div>
       </div>
     </InfoPageShell>
+    </>
   );
 }
