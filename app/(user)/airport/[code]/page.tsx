@@ -60,6 +60,8 @@ async function getParkingProviders(airportId: string) {
       distance: String(row.distance),
       features: String(row.features),
       affiliateUrl: String(row.affiliate_url),
+      rating: Number(row.rating || 0),
+      rating_count: Number(row.rating_count || 0),
       created_at: String(row.created_at),
       updated_at: String(row.updated_at),
     }));
@@ -213,6 +215,12 @@ export default async function AirportPage({ params }: AirportPageProps) {
       item: {
         "@type": "Product",
         name: p.name,
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: Number(p.rating) || 0,
+          reviewCount: Number(p.rating_count) || 0,
+          bestRating: 5,
+        },
         offers: { "@type": "Offer", price: p.pricePerDay, priceCurrency: "USD", availability: "https://schema.org/InStock" },
         url: `https://airportmatrix.com/airport/${airport.code.toLowerCase()}/${p.slug}`,
       },

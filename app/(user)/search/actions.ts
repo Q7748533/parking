@@ -22,6 +22,8 @@ export type ParkingProvider = {
   distance: string;
   features: string;
   affiliateUrl: string;
+  rating?: number;
+  ratingCount?: number;
   created_at: string;
   updated_at: string;
 };
@@ -43,6 +45,8 @@ function rowToProvider(row: Record<string, unknown>): ParkingProvider {
     distance: String(row.distance),
     features: String(row.features),
     affiliateUrl: String(row.affiliate_url),
+    rating: row.rating != null ? Number(row.rating) : undefined,
+    ratingCount: row.rating_count != null ? Number(row.rating_count) : undefined,
     created_at: String(row.created_at),
     updated_at: String(row.updated_at),
   };

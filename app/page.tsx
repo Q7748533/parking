@@ -217,6 +217,14 @@ export default async function HomePage() {
                     "@type": "Product",
                     name: p.name,
                     description: `Parking at ${airport.name} (${airport.code})`,
+                    ...(p.rating ? {
+                      aggregateRating: {
+                        "@type": "AggregateRating",
+                        ratingValue: p.rating,
+                        reviewCount: p.ratingCount || 0,
+                        bestRating: 5,
+                      },
+                    } : {}),
                     offers: {
                       "@type": "Offer",
                       price: p.pricePerDay,
