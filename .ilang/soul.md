@@ -1,70 +1,53 @@
-# AirportMatrix — Soul
-
-> Auto-maintained project profile. Updated each session by AI.
-> I-Lang protocol v2.0 — portable across Claude, ChatGPT, Cursor, Copilot, etc.
-
----
-
-## Project Identity
-
-- **Name:** AirportMatrix
-- **Purpose:** Airport parking price comparison and booking platform for US airports
-- **Audience:** US travelers looking for affordable airport parking
-- **Brand:** "AIRPORT MATRIX" — indigo (#6366f1) primary color, professional but approachable
-- **Domain:** airportmatrix.com
-
-## Tech Stack
-
-- **Framework:** Next.js 16.2.4 (App Router, ISR with `revalidate = 3600`)
-- **Language:** TypeScript 5 (strict mode)
-- **Styling:** Tailwind CSS v4 + tailwind-merge + class-variance-authority
-- **UI Components:** Custom shadcn-style (`components/ui/`) built on Radix primitives
-- **Icons:** lucide-react
-- **Tables:** @tanstack/react-table (admin), native `<table>` (public)
-- **Database:** Turso (libSQL) via `@libsql/client` (direct SQL, no ORM)
-- **AI:** Gemini via vectorengine.ai proxy — content generation, review summarization (anti-fabrication prompt, temperature 0.7)
-- **Deployment:** Vercel (free tier, `ignoreBuildErrors` for Turbopack build)
-
-## Code Conventions
-
-- **Server Actions:** All data mutations use `"use server"` functions in `actions.ts` files, colocated with pages
-- **Database access:** Direct Turso SQL via `lib/db.ts`. No ORM (Prisma removed as dead code).
-- **Validation:** Server-side input validation via `lib/validate.ts` — 15 typed functions for airports + parking
-- **Type patterns:** Server actions export types alongside functions (e.g., `Airport`, `ParkingProvider`, `AirportFormData`)
-- **Result pattern:** All server functions return `{ success: boolean; data?: T; error?: string }`
-- **Slugs:** Generated via `lib/slug.ts` → stored in DB column, no runtime fallback
-- **Parking types:** Normalized via `normalizeType()` — strips Way.com "Park" suffix, 14 valid types
-- **Shared components:** `components/user/header.tsx` (client, mobile menu), `components/user/footer.tsx` (server)
-- **Admin UI:** Chinese labels, violet/purple color scheme, sidebar + header layout
-- **User UI:** English, indigo (#6366f1) accents, clean white cards on gray (#f5f7fa) background
-- **Layouts:** `(user)/layout.tsx` wraps all public sub-pages with shared Header+Footer. Homepage imports Header/Footer directly.
-
-## SEO Philosophy
-
-- **PSEO approach:** Every page template generates unique, data-driven content from DB — no hardcoded copy
-- **I-Lang compliance:** All 9 public pages declare H1+H2+H3 in I-Lang metadata matching DOM exactly
-- **Structured data:** WebSite, Organization, BreadcrumbList, ItemList, Product+AggregateRating+Review, CollectionPage, AboutPage, ContactPage, FAQPage — plus I-Lang ContentLayer on every page
-- **Semantic HTML:** `<main>`, `<article>`, `<table>/<thead>/<tr>/<th>/<td>`, `<dl>/<dt>/<dd>` on all pages
-- **Dynamic meta:** Every page's title and description are built from real DB data (prices, counts, types)
-- **ISR:** All public pages `revalidate = 3600`, admin pages dynamic
-- **E-E-A-T signals:** Stats bar on homepage, rating breakdown on detail pages, "What Travelers Say" AI summary, Organization+AboutPage+ContactPage schema
-- **Cross-reference:** "More Parking at {airportCode}" on parking detail; "Nearby Airports" on airport detail (same state); "All {state} airports" state aggregation pages
-- **State aggregation:** `/airport-parking/[state]` — 50 states, dynamic airport cards + parking counts, I-Lang + ItemList schema
-- **SEO infrastructure:** robots.txt, sitemap.xml (dynamic, includes states), custom 404, `metadataBase` configured, OG images
-
-## Architectural Decisions
-
-- **Route groups** separate user-facing `(user)` and admin `(admin)` layouts with no layout inheritance
-- **Colocated server actions** — each feature area has its own `actions.ts`
-- **Client components** handle search/filter state; admin CRUD uses client state with server action calls
-- **No auth** for admin routes currently
-- **AI parse pipeline:** Raw JSON → `extractBasicData()` → `resolveAirportId()` → `generateContentWithAI()` → merged form data. Separate `summarizeReviews()` for review text.
-- **Batch queries:** `batchGetParkingProviders()` fetches all parking in 1 query (up to 10 per airport), with separate GROUP BY for real total counts
-- **Cache invalidation:** Admin CRUD calls `revalidatePath("/")` so homepage refreshes instantly on parking changes
-- **Parallel stats:** Airport detail page runs 9 parallel DB queries for stats, with in-memory fallback
-- **Loading UX:** `loading.tsx` skeleton files at key route segments
-- **Error states:** Red banner + retry on `search-page-client` and `airport-parking-client`
-- **Debounce:** 200ms client-side search filter (no keystroke jank)
-- **Pagination:** Admin parking + airports pages — 20 items/page, prev/next, "Showing X–Y of Z"
-- **Schema:** Product items include `image`, `review`, `aggregateRating`, `shippingDetails`, `hasMerchantReturnPolicy` — Search Console compliant
-- **OG image:** `public/og-image.svg` — brand card (1200×1200) for social sharing and Schema image field
+::DNA{project}
+::CONTEXT{name:AirportMatrix|type:airport_parking_comparison|audience:US_travelers|domain:airportmatrix.com}
+::CORE{
+  ::STACK{framework:Next.js_16.2.4|language:TypeScript_5|styling:Tailwind_v4|db:Turso_libSQL|ai:Gemini_via_vectorengine|deploy:Vercel_free}
+  ::UI{icons:lucide-react|admin_table:@tanstack/react-table|public_table:native_HTML|components:shadcn-style_Radix}
+  ::BRAND{color:#6366f1|admin:Chinese_violet_purple|user:English_indigo_white_cards}
+}
+::GENE{code_patterns|conf:confirmed}
+  T:server_actions_colocated_in_actions.ts
+  T:direct_SQL_no_ORM
+  T:result_pattern_{success_boolean_data_or_error_string}
+  T:server_side_validate_all_admin_inputs
+  T:slug_stored_in_DB_no_runtime_fallback
+  T:parking_type_normalized_via_normalizeType
+  T:shared_header_footer_via_user_layout
+  A:client_side_only_validation⇒security_risk
+  A:runtime_slug_generation⇒unstable_URLs
+::GENE{seo_patterns|conf:confirmed}
+  T:I-Lang_H1_H2_H3_match_DOM_exactly
+  T:dynamic_meta_from_DB_data
+  T:semantic_HTML_main_article_table_dl
+  T:structured_data_Breadcrumb_Organization_WebSite_Product_FAQPage
+  T:ISR_revalidate_3600_all_public_pages
+  T:sitemap_dynamic_30min_refresh
+  T:every_page_has_Organization_WebSite_schema
+  A:hardcoded_meta_descriptions⇒stale_SEO
+  A:div_grids_for_tables⇒semantic_loss
+::GENE{ai_pipeline|conf:confirmed}
+  T:extractBasicData_→_resolveAirportId_→_generateContentWithAI_→_mergedForm
+  T:summarizeReviews_FABRICATION_PREVENTION_strict
+  T:temperature_0.7_vary_openings_no_formulaic
+  T:normalizeType_strips_Park_suffix
+  A:shuttle_mentioned_when_no_review_evidence⇒fabrication
+  A:compound_type_names_missing_from_valid_list⇒rejection
+::GENE{ux_patterns|conf:confirmed}
+  T:debounce_search_200ms
+  T:loading_skeletons_at_route_segments
+  T:error_banner_retry_on_client_pages
+  T:admin_pagination_20_per_page
+  T:cross_reference_More_Parking_Nearby_Airports
+  T:open_graph_image_1200x1200
+::LESSONS{
+  ::LESSON{id:waycom_parking_types_inconsistent|conf:confirmed}
+    T:add_normalizeType_early_dont_trust_consistent_naming
+  ::LESSON{id:ai_review_summaries_template_sound_alike|conf:confirmed}
+    T:ban_formulaic_phrases_enforce_unique_openings
+    T:anti_fabrication_rules_essential
+  ::LESSON{id:vercel_free_tier_turbopack_oom|conf:confirmed}
+    T:ignoreBuildErrors_ship_first_check_later
+  ::LESSON{id:nextjs_route_groups_dont_create_URL_prefix|conf:confirmed}
+    T:admin_dashboard_needs_explicit_admin_page_tsx
+}
+::ORIGIN{protocol:I-Lang_v3.0|project:AirportMatrix|license:commercial}
