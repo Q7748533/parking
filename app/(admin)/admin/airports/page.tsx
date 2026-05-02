@@ -106,6 +106,7 @@ export default function AirportsPage() {
           </Button>
         </div>
       ) : (
+        <>
         <DataTable
           data={airports}
           onEdit={handleEdit}
@@ -136,6 +137,7 @@ export default function AirportsPage() {
             </div>
           </div>
         )}
+        </>
       )}
 
       <AirportDialog

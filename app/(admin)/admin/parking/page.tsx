@@ -98,6 +98,7 @@ export default function ParkingPage() {
           </Button>
         </div>
       ) : (
+        <>
         <DataTable
           data={providers}
           isLoading={isLoading}
@@ -129,6 +130,7 @@ export default function ParkingPage() {
             </div>
           </div>
         )}
+        </>
       )}
 
       <ParkingDialog
