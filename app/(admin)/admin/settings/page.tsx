@@ -2,7 +2,10 @@ import { getSiteSetting } from "./actions";
 import { SettingsForm } from "./settings-form";
 
 export default async function SettingsPage() {
-  const ga4Id = await getSiteSetting("ga4_measurement_id");
+  const [ga4Id, monetagZoneId] = await Promise.all([
+    getSiteSetting("ga4_measurement_id"),
+    getSiteSetting("monetag_zone_id"),
+  ]);
 
   return (
     <div className="space-y-6 max-w-2xl">
@@ -11,7 +14,7 @@ export default async function SettingsPage() {
         <p className="text-muted-foreground mt-1">网站全局配置</p>
       </div>
 
-      <SettingsForm initialGa4Id={ga4Id} />
+      <SettingsForm initialGa4Id={ga4Id} initialMonetagZoneId={monetagZoneId} />
     </div>
   );
 }

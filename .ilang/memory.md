@@ -124,3 +124,7 @@
   ::FACT{searchAirports_now_returns_totalParkingCount_ALL_providers_when_≤3_airports_capped_10_when_>3}
   ::FACT{search_race_condition_fixed_requestIdRef_guard_stale_responses_ignored}
   ::FACT{initial_direct_URL_q_load_flash_fixed_isSearching_init_to_initialQuery_present}
+::DECISION{id:monetag_admin_settings|conf:confirmed}
+  ::FILES{app/(admin)/admin/settings/settings-form.tsx|app/(admin)/admin/settings/page.tsx|app/layout.tsx}
+  ::FACT{monetag_zone_id_admin_form_saved_to_site_settings_table}
+  ::FACT{public_layout_reads_monetag_zone_id_injects_script_via_next_script}

@@ -55,14 +55,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   let ga4Id: string | null = null;
+  let monetagZoneId: string | null = null;
   try {
     const result = await turso.execute({
-      sql: "SELECT value FROM site_settings WHERE key = 'ga4_measurement_id'",
+      sql: "SELECT key, value FROM site_settings WHERE key IN ('ga4_measurement_id', 'monetag_zone_id')",
       args: [],
     });
-    if (result.rows.length > 0) {
-      const v = String(result.rows[0].value).trim();
-      if (v) ga4Id = v;
+    for (const row of result.rows) {
+      const key = String(row.key);
+      const val = String(row.value).trim();
+      if (key === "ga4_measurement_id" && val) ga4Id = val;
+      if (key === "monetag_zone_id" && val) monetagZoneId = val;
     }
   } catch { /* table might not exist yet */ }
 
@@ -72,6 +75,14 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
+        {monetagZoneId && (
+          <Script
+            id="monetag"
+            strategy="afterInteractive"
+            src={`https://quge5.com/88/tag.min.js`}
+            data-zone={monetagZoneId}
+          />
+        )}
         {ga4Id && (
           <>
             <Script
