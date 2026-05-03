@@ -10,6 +10,7 @@ import {
   X,
   ChevronRight,
   LayoutDashboard,
+  Settings,
   LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,11 @@ const sidebarItems = [
     title: "停车场管理",
     href: "/admin/parking",
     icon: Car,
+  },
+  {
+    title: "设置",
+    href: "/admin/settings",
+    icon: Settings,
   },
 ];
 

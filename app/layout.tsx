@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { turso } from "@/lib/db";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -47,17 +49,30 @@ export const viewport: Viewport = {
   themeColor: "#6366f1",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let ga4Id: string | null = null;
+  try {
+    const result = await turso.execute({
+      sql: "SELECT value FROM site_settings WHERE key = 'ga4_measurement_id'",
+      args: [],
+    });
+    if (result.rows.length > 0) {
+      const v = String(result.rows[0].value).trim();
+      if (v) ga4Id = v;
+    }
+  } catch { /* table might not exist yet */ }
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
+        {ga4Id && <GoogleAnalytics gaId={ga4Id} />}
         {children}
       </body>
     </html>

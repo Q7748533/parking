@@ -96,5 +96,18 @@
   ::FACT{displayed_in_detail_page_sidebar_below_location_type}
   ::FACT{Product_schema_shippingDetails_removed_brand_applicableCountry_added}
   ::FACT{aggregateRating_review_always_present_no_conditional_skip}
-  ::FACT{state_pages_removed_insufficient_data_per_state}
+  ::FACT{state_pages_removed_from_sitemap_and_code}
+  ::FACT{Product_schema_brand_applicableCountry_shippingDetails_removed_all_3_locations}
+  ::FACT{aggregateRating_review_always_present_unconditional}
+  ::FACT{additional_fees_field_parsed_from_parkingAccess_text_regex}
+  ::FACT{soul_md_restructured_with_SOUL_template_boot_check_behavioral_genes}
+  ::FACT{medium_articles_user_perspective_and_builder_perspective}
+  ::FACT{admin_login_production_working}
   ::FACT{info_pages_OrganizationSchema_Fragment_wrapper_fix}
+::DECISION{id:ga4_admin_settings|conf:confirmed}
+  ::FILES{scripts/add-settings-table.ts|app/(admin)/admin/settings/page.tsx|app/(admin)/admin/settings/settings-form.tsx|app/(admin)/admin/settings/actions.ts|app/(admin)/layout.tsx|app/layout.tsx|package.json}
+  ::FACT{site_settings_key_value_table_for_global_config}
+  ::FACT{GA4_Measurement_ID_admin_form_save_to_DB}
+  ::FACT{public_layout_reads_ga4_id_from_DB_injects_GoogleAnalytics_component}
+  ::FACT{admin_sidebar_added_settings_entry}
+  ::FACT{@next/third-parties_added_to_dependencies}

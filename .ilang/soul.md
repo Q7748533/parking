@@ -68,7 +68,8 @@
   T:admin_pagination_20_per_page
   T:ux_debounce_200ms_loading_skeletons_error_retry
   T:ux_shared_header_footer_cross_reference_links
-  T:pseo_state_aggregation_pages_nearby_airport_links_dynamic_faq
+  T:pseo_nearby_airport_links_dynamic_faq_airport_detail_content
+  T:pseo_state_pages_removed_insufficient_data_per_state
   T:cache_revalidatePath_homepage_on_parking_CRUD
   A:client_only_validation⇒security_risk
   A:runtime_slug_generation⇒unstable_URLs
@@ -87,6 +88,9 @@
     T:admin_routes_need_explicit_admin_directory
   ::LESSON{id:OG_images_overridden_by_page_metadata|conf:confirmed}
     T:every_generateMetadata_must_include_images_field
+  ::LESSON{id:PSEO_pages_need_real_data_not_templates|conf:confirmed}
+    T:delete_empty_aggregation_pages_until_data_exists
+    T:one_airport_per_state_does_not_justify_state_page
 }
 
 ::GENE{ilang_protocol|conf:confirmed|scope:global}
