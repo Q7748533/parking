@@ -221,23 +221,21 @@ export default async function HomePage() {
                     description: `Parking at ${airport.name} (${airport.code})`,
                     image: "https://airportmatrix.com/og-image.png",
                     brand: { "@type": "Brand", name: "AirportMatrix" },
-                    ...(p.rating ? {
-                      aggregateRating: {
-                        "@type": "AggregateRating",
-                        ratingValue: p.rating,
-                        reviewCount: p.ratingCount || 0,
+                    aggregateRating: {
+                      "@type": "AggregateRating",
+                      ratingValue: p.rating || 0,
+                      reviewCount: p.ratingCount || 0,
+                      bestRating: 5,
+                    },
+                    review: {
+                      "@type": "Review",
+                      author: { "@type": "Organization", name: "AirportMatrix" },
+                      reviewRating: {
+                        "@type": "Rating",
+                        ratingValue: p.rating || 0,
                         bestRating: 5,
                       },
-                      review: {
-                        "@type": "Review",
-                        author: { "@type": "Organization", name: "AirportMatrix" },
-                        reviewRating: {
-                          "@type": "Rating",
-                          ratingValue: p.rating,
-                          bestRating: 5,
-                        },
-                      },
-                    } : {}),
+                    },
                     offers: {
                       "@type": "Offer",
                       price: p.pricePerDay,
