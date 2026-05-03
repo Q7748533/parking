@@ -107,13 +107,12 @@ export async function searchAirports(
     const offset = (page - 1) * pageSize;
 
     const result = await turso.execute({
-      sql: `SELECT DISTINCT a.* FROM airports a
-            LEFT JOIN parking_providers p ON a.id = p.airport_id
+      sql: `SELECT a.* FROM airports a
             WHERE a.code LIKE ?
             OR a.name LIKE ?
             OR a.city LIKE ?
             OR a.state LIKE ?
-            OR p.name LIKE ?
+            OR EXISTS (SELECT 1 FROM parking_providers p WHERE p.airport_id = a.id AND p.name LIKE ?)
             ORDER BY a.code ASC
             LIMIT ? OFFSET ?`,
       args: [searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, pageSize, offset],

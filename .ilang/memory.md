@@ -111,3 +111,13 @@
   ::FACT{public_layout_reads_ga4_id_from_DB_injects_GoogleAnalytics_component}
   ::FACT{admin_sidebar_added_settings_entry}
   ::FACT{@next/third-parties_added_to_dependencies}
+  ::FACT{@next/third-parties_GoogleAnalytics_not_compatible_Next_16_switched_to_native_next_script}
+  ::FACT{root_layout_ISR_cache_blocked_GA4_fixed_with_revalidatePath_slash_layout}
+  ::FACT{GA4_G-D71PKQMHF0_confirmed_working_on_production}
+::SESSION{2026-05-03}
+::DECISION{id:search_optimization|conf:confirmed}
+  ::FILES{app/search-page-client.tsx|app/(user)/search/actions.ts|app/page.tsx}
+  ::FACT{search_query_synced_to_URL_q_param_useSearchParams_router_replace}
+  ::FACT{client_side_array_filtering_removed_all_searches_server_side_unified}
+  ::FACT{searchAirports_query_optimized_EXISTS_subquery_replaces_DISTINCT_LEFT_JOIN}
+  ::FACT{page_tsx_added_Suspense_boundary_for_useSearchParams}

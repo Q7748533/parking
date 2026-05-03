@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import { SearchPageClient } from "./search-page-client";
 import { SeoContent } from "./(user)/seo-content";
 import { getAirportsWithParking } from "./(user)/search/actions";
@@ -255,12 +256,14 @@ export default async function HomePage() {
             }),
           }}
         />
-        <SearchPageClient
-          airportsWithParking={airportsWithParking}
-          totalAirports={totalAirports}
-          totalProviders={totalProviders}
-          error={result.success ? undefined : (result.error || "Failed to load data")}
-        />
+        <Suspense fallback={null}>
+          <SearchPageClient
+            airportsWithParking={airportsWithParking}
+            totalAirports={totalAirports}
+            totalProviders={totalProviders}
+            error={result.success ? undefined : (result.error || "Failed to load data")}
+          />
+        </Suspense>
         <SeoContent topAirports={topAirportsForSeo} totalAirports={totalAirports} />
       </main>
       <Footer />

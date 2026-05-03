@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
-import Link from "next/link";
+import { useState, useRef, useCallback, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Search, MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -16,67 +16,85 @@ interface SearchPageClientProps {
 }
 
 export function SearchPageClient({ airportsWithParking, totalAirports = 0, totalProviders = 0, error }: SearchPageClientProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q") ?? "";
+
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<AirportWithParking[]>([]);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [hasSearched, setHasSearched] = useState(initialQuery !== "");
   const [sortBy, setSortBy] = useState<"price" | "distance">("price");
   const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+  const serverSearchRef = useRef(false); // prevent double-search on mount
 
+  // Execute a server search and sync URL
+  const doSearch = useCallback(async (query: string) => {
+    const q = query.trim();
+    if (!q) {
+      setHasSearched(false);
+      setSearchResults([]);
+      router.replace("/", { scroll: false });
+      return;
+    }
+
+    setIsSearching(true);
+    setHasSearched(true);
+    router.replace(`/?q=${encodeURIComponent(q)}`, { scroll: false });
+
+    const result = await searchAirports(q);
+    if (result.success && result.data) {
+      setSearchResults(result.data);
+    } else {
+      setSearchResults([]);
+    }
+    setIsSearching(false);
+  }, [router]);
+
+  // On mount: if URL has ?q=, run server search once
+  useEffect(() => {
+    if (initialQuery && !serverSearchRef.current) {
+      serverSearchRef.current = true;
+      doSearch(initialQuery);
+    }
+  }, [initialQuery, doSearch]);
+
+  // Debounced search on typing — always hits server
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       setSearchQuery(value);
-
       clearTimeout(debounceRef.current);
 
       if (!value.trim()) {
         setHasSearched(false);
         setSearchResults([]);
+        router.replace("/", { scroll: false });
         return;
       }
 
       debounceRef.current = setTimeout(() => {
-        const q = value.toLowerCase();
-        const filtered = airportsWithParking.filter(
-          (a) =>
-            a.code.toLowerCase().includes(q) ||
-            a.name.toLowerCase().includes(q) ||
-            a.city.toLowerCase().includes(q) ||
-            a.state.toLowerCase().includes(q) ||
-            a.parkingProviders.some((p) => p.name.toLowerCase().includes(q))
-        );
-        setSearchResults(filtered);
-        setHasSearched(true);
+        doSearch(value);
       }, 200);
     },
-    [airportsWithParking]
+    [doSearch, router]
   );
 
+  // Form submit — immediate search (no debounce)
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
+    clearTimeout(debounceRef.current);
     if (!searchQuery.trim()) return;
-
-    setIsSearching(true);
-    setHasSearched(true);
-
-    const result = await searchAirports(searchQuery);
-    if (result.success && result.data) {
-      setSearchResults(result.data);
-    }
-
-    setIsSearching(false);
+    doSearch(searchQuery);
   };
 
   const displayAirports = hasSearched ? searchResults : airportsWithParking;
 
-  // Sort parking providers based on selected sort option
   const getSortedProviders = (providers: AirportWithParking["parkingProviders"]) => {
     const sorted = [...providers];
     if (sortBy === "price") {
       sorted.sort((a, b) => a.pricePerDay - b.pricePerDay);
     } else if (sortBy === "distance") {
-      // Parse distance string to number for comparison
       sorted.sort((a, b) => {
         const distA = parseFloat(a.distance) || 0;
         const distB = parseFloat(b.distance) || 0;
@@ -163,7 +181,7 @@ export function SearchPageClient({ airportsWithParking, totalAirports = 0, total
           </div>
 
           {/* Results List */}
-          {hasSearched && searchResults.length === 0 ? (
+          {hasSearched && searchResults.length === 0 && !isSearching ? (
             <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
               <Search className="w-12 h-12 mx-auto mb-4 text-gray-300" />
               <p className="text-gray-600 text-lg mb-2">No airports found</p>
@@ -245,7 +263,7 @@ export function SearchPageClient({ airportsWithParking, totalAirports = 0, total
 
                       {/* Mobile Cards (shown only on mobile) */}
                       <div className="md:hidden space-y-3">
-                        {getSortedProviders(airport.parkingProviders).slice(0, 10).map((provider, idx) => (
+                        {getSortedProviders(airport.parkingProviders).slice(0, 10).map((provider) => (
                           <a
                             key={provider.id}
                             href={`/airport/${airport.code.toLowerCase()}/${provider.slug}`}
@@ -266,7 +284,7 @@ export function SearchPageClient({ airportsWithParking, totalAirports = 0, total
                                 <div className="text-xs text-gray-500">/day</div>
                               </div>
                             </div>
-                            
+
                             {/* Card Details */}
                             <div className="flex items-center justify-between text-sm text-gray-600">
                               <div className="flex items-center gap-3">
@@ -319,7 +337,6 @@ export function SearchPageClient({ airportsWithParking, totalAirports = 0, total
           </div>
         </section>
       )}
-
     </>
   );
 }
