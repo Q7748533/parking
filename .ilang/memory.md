@@ -96,4 +96,5 @@
   ::FACT{displayed_in_detail_page_sidebar_below_location_type}
   ::FACT{Product_schema_shippingDetails_removed_brand_applicableCountry_added}
   ::FACT{aggregateRating_review_always_present_no_conditional_skip}
+  ::FACT{state_pages_removed_insufficient_data_per_state}
   ::FACT{info_pages_OrganizationSchema_Fragment_wrapper_fix}
