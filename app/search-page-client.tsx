@@ -21,12 +21,13 @@ export function SearchPageClient({ airportsWithParking, totalAirports = 0, total
   const initialQuery = searchParams.get("q") ?? "";
 
   const [searchQuery, setSearchQuery] = useState(initialQuery);
-  const [isSearching, setIsSearching] = useState(false);
+  const [isSearching, setIsSearching] = useState(initialQuery !== "");
   const [searchResults, setSearchResults] = useState<AirportWithParking[]>([]);
   const [hasSearched, setHasSearched] = useState(initialQuery !== "");
   const [sortBy, setSortBy] = useState<"price" | "distance">("price");
   const debounceRef = useRef<ReturnType<typeof setTimeout>>();
   const serverSearchRef = useRef(false); // prevent double-search on mount
+  const requestIdRef = useRef(0); // race condition guard
 
   // Execute a server search and sync URL
   const doSearch = useCallback(async (query: string) => {
@@ -38,11 +39,14 @@ export function SearchPageClient({ airportsWithParking, totalAirports = 0, total
       return;
     }
 
+    const thisId = ++requestIdRef.current;
     setIsSearching(true);
     setHasSearched(true);
     router.replace(`/?q=${encodeURIComponent(q)}`, { scroll: false });
 
     const result = await searchAirports(q);
+    // Ignore stale responses
+    if (thisId !== requestIdRef.current) return;
     if (result.success && result.data) {
       setSearchResults(result.data);
     } else {

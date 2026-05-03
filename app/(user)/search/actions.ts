@@ -120,14 +120,30 @@ export async function searchAirports(
 
     const airportIds = result.rows.map((r) => String(r.id));
 
-    // Single batch query instead of N+1
-    const parkingByAirport = await batchGetParkingProviders(airportIds);
+    if (airportIds.length === 0) return { success: true, data: [] };
+
+    // Fetch total parking counts per airport
+    const countsMap = new Map<string, number>();
+    const countPlaceholders = airportIds.map(() => "?").join(", ");
+    const countsResult = await turso.execute({
+      sql: `SELECT airport_id, COUNT(*) as cnt FROM parking_providers
+            WHERE airport_id IN (${countPlaceholders}) GROUP BY airport_id`,
+      args: airportIds,
+    });
+    for (const row of countsResult.rows) {
+      countsMap.set(String(row.airport_id), Number(row.cnt));
+    }
+
+    // ≤3 airports: show all providers. >3: cap at 10 per airport (preview mode)
+    const perAirport = airportIds.length <= 3 ? 9999 : 10;
+    const parkingByAirport = await batchGetParkingProviders(airportIds, perAirport);
 
     const airports: AirportWithParking[] = result.rows.map((row) => {
       const airport = rowToAirport(row);
       return {
         ...airport,
         parkingProviders: parkingByAirport.get(airport.id) || [],
+        totalParkingCount: countsMap.get(airport.id) || 0,
       };
     });
 

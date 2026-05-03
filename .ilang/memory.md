@@ -121,3 +121,6 @@
   ::FACT{client_side_array_filtering_removed_all_searches_server_side_unified}
   ::FACT{searchAirports_query_optimized_EXISTS_subquery_replaces_DISTINCT_LEFT_JOIN}
   ::FACT{page_tsx_added_Suspense_boundary_for_useSearchParams}
+  ::FACT{searchAirports_now_returns_totalParkingCount_ALL_providers_when_≤3_airports_capped_10_when_>3}
+  ::FACT{search_race_condition_fixed_requestIdRef_guard_stale_responses_ignored}
+  ::FACT{initial_direct_URL_q_load_flash_fixed_isSearching_init_to_initialQuery_present}
