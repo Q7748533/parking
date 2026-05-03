@@ -25,6 +25,7 @@ export async function saveSiteSetting(key: string, value: string) {
       args: [key, value],
     });
     revalidatePath("/admin/settings");
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (error) {
     console.error("Failed to save site setting:", error);
