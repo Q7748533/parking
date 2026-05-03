@@ -220,6 +220,7 @@ export default async function AirportPage({ params }: AirportPageProps) {
         name: p.name,
         description: `Parking at ${airport.name} (${airport.code}) — ${p.type || "parking"} from $${p.pricePerDay.toFixed(2)}/day`,
         image: "https://airportmatrix.com/og-image.png",
+        brand: { "@type": "Brand", name: "AirportMatrix" },
         aggregateRating: {
           "@type": "AggregateRating",
           ratingValue: Number(p.rating) || 0,

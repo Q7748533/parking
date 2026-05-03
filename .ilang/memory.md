@@ -94,4 +94,5 @@
   ::FACT{DB_column_additional_fees_TEXT_added_via_migration}
   ::FACT{extractAdditionalFees_parses_SUV_truck_oversized_surcharge_from_text}
   ::FACT{displayed_in_detail_page_sidebar_below_location_type}
+  ::FACT{Product_schema_shippingDetails_removed_brand_applicableCountry_added}
   ::FACT{info_pages_OrganizationSchema_Fragment_wrapper_fix}

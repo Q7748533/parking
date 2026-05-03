@@ -220,6 +220,7 @@ export default async function HomePage() {
                     name: p.name,
                     description: `Parking at ${airport.name} (${airport.code})`,
                     image: "https://airportmatrix.com/og-image.png",
+                    brand: { "@type": "Brand", name: "AirportMatrix" },
                     ...(p.rating ? {
                       aggregateRating: {
                         "@type": "AggregateRating",

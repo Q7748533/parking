@@ -87,6 +87,7 @@ export default async function ParkingPage({ params }: ParkingPageProps) {
     name: cleanName,
     description: parking.description || `${cleanName} at ${parking.airportCode} Airport`,
     image: "https://airportmatrix.com/og-image.png",
+    brand: { "@type": "Brand", name: "AirportMatrix" },
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: parking.rating,
