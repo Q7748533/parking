@@ -55,6 +55,7 @@ export default function AboutPage() {
       name: "AirportMatrix",
       url: "https://airportmatrix.com",
       description: "Leading airport parking comparison platform helping travelers save up to 60% on parking at 500+ US airports.",
+      image: "https://airportmatrix.com/og-image.png",
       foundingDate: "2025",
       contactPoint: { "@type": "ContactPoint", email: "contact@airportmatrix.com", contactType: "customer service" },
     },

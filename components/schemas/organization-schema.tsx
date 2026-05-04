@@ -11,6 +11,7 @@ export function OrganizationSchema({ airportCount }: OrgSchemaProps) {
     name: "AirportMatrix",
     url: "https://airportmatrix.com",
     description: `Compare airport parking prices and find deals at ${coverage}`,
+    image: "https://airportmatrix.com/og-image.png",
     potentialAction: {
       "@type": "SearchAction",
       target: "https://airportmatrix.com/?q={search_term_string}",
@@ -24,6 +25,7 @@ export function OrganizationSchema({ airportCount }: OrgSchemaProps) {
     name: "AirportMatrix",
     url: "https://airportmatrix.com",
     description: `Leading airport parking comparison platform helping travelers save up to 60% on parking at ${coverage}.`,
+    image: "https://airportmatrix.com/og-image.png",
     foundingDate: "2025",
     contactPoint: {
       "@type": "ContactPoint",

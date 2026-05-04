@@ -127,4 +127,8 @@
 ::DECISION{id:monetag_admin_settings|conf:confirmed}
   ::FILES{app/(admin)/admin/settings/settings-form.tsx|app/(admin)/admin/settings/page.tsx|app/layout.tsx}
   ::FACT{monetag_zone_id_admin_form_saved_to_site_settings_table}
-  ::FACT{public_layout_reads_monetag_zone_id_injects_script_via_next_script}
+  ::FACT{monetag_zone_id_235847_confirmed_deployed_working}
+::DECISION{id:schema_image_field_fix|conf:confirmed}
+  ::FILES{components/schemas/organization-schema.tsx|app/page.tsx|app/(user)/about/page.tsx|app/(user)/contact/page.tsx}
+  ::FACT{Organization_WebSite_schemas_missing_image_field_added_og_image_png}
+  ::FACT{fixes_Google_Search_Console_rich_results_image_error}

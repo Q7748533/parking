@@ -54,6 +54,7 @@ export default function ContactPage() {
       "@type": "Organization",
       name: "AirportMatrix",
       url: "https://airportmatrix.com",
+      image: "https://airportmatrix.com/og-image.png",
       contactPoint: [
         { "@type": "ContactPoint", email: "contact@airportmatrix.com", contactType: "customer service" },
         { "@type": "ContactPoint", email: "partners@airportmatrix.com", contactType: "sales" },

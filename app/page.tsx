@@ -48,6 +48,7 @@ const structuredData = {
   name: "AirportMatrix",
   url: "https://airportmatrix.com",
   description: "Compare airport parking prices and book deals at 500+ airports",
+  image: "https://airportmatrix.com/og-image.png",
   potentialAction: {
     "@type": "SearchAction",
     target: "https://airportmatrix.com/?q={search_term_string}",
@@ -135,6 +136,7 @@ const organizationData = {
   name: "AirportMatrix",
   url: "https://airportmatrix.com",
   description: "Leading airport parking comparison platform helping travelers save up to 60% on parking at 500+ US airports.",
+  image: "https://airportmatrix.com/og-image.png",
   foundingDate: "2025",
   contactPoint: {
     "@type": "ContactPoint",
