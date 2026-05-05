@@ -132,3 +132,6 @@
   ::FILES{components/schemas/organization-schema.tsx|app/page.tsx|app/(user)/about/page.tsx|app/(user)/contact/page.tsx}
   ::FACT{Organization_WebSite_schemas_missing_image_field_added_og_image_png}
   ::FACT{fixes_Google_Search_Console_rich_results_image_error}
+::DECISION{id:parking_detail_pricing_disclaimer|conf:confirmed}
+  ::FILES{app/(user)/airport/[code]/[parkingId]/parking-detail-client.tsx}
+  ::FACT{pricing_disclaimer_added_below_price_rates_may_include_taxes_fees_surcharges}

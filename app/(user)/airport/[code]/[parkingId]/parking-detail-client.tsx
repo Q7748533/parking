@@ -403,6 +403,13 @@ export function ParkingDetailClient({ parking, otherParking = [] }: ParkingDetai
                   )}
                 </div>
 
+                {/* Pricing Disclaimer */}
+                <p className="text-xs text-gray-400 leading-relaxed mb-4">
+                  Rates shown are base daily rates. Final pricing at checkout may include
+                  applicable taxes, service fees, and surcharges for oversized vehicles or
+                  extended stays. The parking provider determines the total amount at time of booking.
+                </p>
+
                 {/* Features */}
                 <div className="space-y-2 mb-6">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
