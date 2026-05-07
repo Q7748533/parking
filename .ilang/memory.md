@@ -135,3 +135,7 @@
 ::DECISION{id:parking_detail_pricing_disclaimer|conf:confirmed}
   ::FILES{app/(user)/airport/[code]/[parkingId]/parking-detail-client.tsx}
   ::FACT{pricing_disclaimer_added_below_price_rates_may_include_taxes_fees_surcharges}
+::DECISION{id:seo_redirect_robots_fix|conf:confirmed}
+  ::FILES{app/layout.tsx|app/robots.ts}
+  ::FACT{metadataBase_changed_to_www_dot_airportmatrix_dot_com}
+  ::FACT{robots_ts_created_disallow_admin_sitemap_pointer}

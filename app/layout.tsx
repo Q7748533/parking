@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://airportmatrix.com"),
+  metadataBase: new URL("https://www.airportmatrix.com"),
   title: "AirportMatrix - Find Airport Parking Deals",
   description: "Compare and book airport parking options across the US. Find the best deals on long-term and short-term parking at JFK, LAX, Chicago, and more.",
   keywords: ["airport parking", "airport parking deals", "long term parking", "short term parking", "JFK parking", "LAX parking", "airport shuttle"],
