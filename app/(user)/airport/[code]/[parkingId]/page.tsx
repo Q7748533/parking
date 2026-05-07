@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { getParkingDetail, getOtherParkingAtAirport, OtherParkingOption } from "../../../search/parking-actions";
 import { ParkingDetailClient } from "./parking-detail-client";
 import { OrganizationSchema } from "@/components/schemas/organization-schema";
@@ -64,6 +64,11 @@ export default async function ParkingPage({ params }: ParkingPageProps) {
 
   if (parking.airportCode.toLowerCase() !== code.toLowerCase()) {
     notFound();
+  }
+
+  // Redirect UUID URLs to slug URLs (eliminate duplicate content)
+  if (parking.slug && parkingId !== parking.slug) {
+    permanentRedirect(`/airport/${code.toLowerCase()}/${parking.slug}`);
   }
 
   const otherResult = await getOtherParkingAtAirport(parking.airportId, parking.id);

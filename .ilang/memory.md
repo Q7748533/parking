@@ -141,3 +141,6 @@
   ::FACT{robots_ts_created_disallow_admin_sitemap_pointer}
   ::FACT{nearby_airports_dead_link_airport_parking_state_fixed_to_slash_airports}
   ::FACT{sitemap_BASE_URL_updated_to_www_dot_airportmatrix_dot_com}
+::DECISION{id:parking_duplicate_url_fix|conf:confirmed}
+  ::FILES{app/(user)/airport/[code]/[parkingId]/page.tsx}
+  ::FACT{UUID_URL_301_redirects_to_slug_URL_eliminates_duplicate_content}
