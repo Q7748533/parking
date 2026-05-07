@@ -139,3 +139,5 @@
   ::FILES{app/layout.tsx|app/robots.ts}
   ::FACT{metadataBase_changed_to_www_dot_airportmatrix_dot_com}
   ::FACT{robots_ts_created_disallow_admin_sitemap_pointer}
+  ::FACT{nearby_airports_dead_link_airport_parking_state_fixed_to_slash_airports}
+  ::FACT{sitemap_BASE_URL_updated_to_www_dot_airportmatrix_dot_com}

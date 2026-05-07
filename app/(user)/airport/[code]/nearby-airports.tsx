@@ -49,7 +49,7 @@ export async function NearbyAirports({ airportCode, airportState, airportName }:
             </Link>
           ))}
           <Link
-            href={`/airport-parking/${airportState.toLowerCase().replace(/\s+/g, "-")}`}
+            href="/airports"
             className="bg-[#6366f1]/5 rounded-lg px-4 py-3 hover:bg-[#6366f1]/10 transition-colors flex items-center"
           >
             <span className="text-sm font-medium text-[#6366f1]">

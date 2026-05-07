@@ -4,7 +4,7 @@ import { turso } from "@/lib/db";
 // Regenerate sitemap every 30 minutes (keeps Google in sync with new data)
 export const revalidate = 1800;
 
-const BASE_URL = process.env.SITE_URL || "https://airportmatrix.com";
+const BASE_URL = process.env.SITE_URL || "https://www.airportmatrix.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
